@@ -1,0 +1,4 @@
+<!ELEMENT sensor (messung)*>
+<!ATTLIST sensor id CDATA # REQUIRED>
+<!ELEMENT messung (#PCDATA)>
+<!ATTLIST messung wert CDATA #REQUIRED zeitstempel CDATA #REQUIRED>
