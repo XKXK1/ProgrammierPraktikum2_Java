@@ -8,8 +8,6 @@ public class Messung {
 	public Messung(double wert, String zeitstempel){
 		this.wert = wert;
 		this.zeitstempel = zeitstempel;
-		/**
-		 * 
-		 */
+		
 	}
 }
