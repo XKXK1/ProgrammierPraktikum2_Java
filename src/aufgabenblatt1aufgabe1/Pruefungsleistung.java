@@ -9,7 +9,7 @@ public class Pruefungsleistung {
 		this.modulname = modulname;
 	}
 	/**
-	 * test
+	 * 
 	 */
 
 }
