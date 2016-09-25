@@ -14,6 +14,6 @@ public class Messung {
 
 	@Override
 	public String toString() {
-		return "Messung [wert=" + wert + ", zeitstempel=" + zeitstempel + "]";
+		return "Messung [wert=" + wert + ", zeitstempel=" + zeitstempel + "]\n";
 	}
 }

@@ -14,10 +14,9 @@ public class Sensor {
 	
 	public static void main(String[] args) {
 		Sensor sensor1 = new Sensor("penis");
-		
-		
-		Messung messung1 = new Messung(5.2);
-		System.out.print(messung1.toString());
+		sensor1.list.add(new Messung(5.2));
+		sensor1.list.add(new Messung(6.3));
+		System.out.println(sensor1.list.toString());
 		
 	
 	}
