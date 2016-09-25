@@ -9,7 +9,7 @@ public class Messung {
 		this.wert = wert;
 		this.zeitstempel = zeitstempel;
 		/**
-		 * 
+		 * 1
 		 */
 	}
 }

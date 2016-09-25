@@ -9,5 +9,8 @@ public class Sensor {
 	public Sensor(String id){
 		this.id = id;
 		List<Messung> list1 = new ArrayList<Messung>();
+		/**
+		 * 1
+		 */
 	}
 }
