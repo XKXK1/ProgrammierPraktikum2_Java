@@ -10,7 +10,7 @@ public class Sensor {
 		this.id = id;
 		List<Messung> list1 = new ArrayList<Messung>();
 		/**
-		 * 1
+		 *
 		 */
 	}
 }
