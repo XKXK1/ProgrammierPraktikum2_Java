@@ -13,40 +13,42 @@ public class Sensor {
     this.id = id;
     list = messungen;
   }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((list == null) ? 0 : list.hashCode());
-    return result;
-  }
-
+  
+  /**
+   * Equals-Methode für den XMLReader-Test
+   */
   @Override
   public boolean equals(Object obj) {
+    if (obj.getClass()==null)
+      return false;
+    // wenn beide Objekte die gleiche Klasse haben,
     if (obj instanceof Sensor) {
+      // wird das obj zum Sensor gecastet
       Sensor that = (Sensor) obj;
-      if (this.getList().size() == that.getList().size()) {
-        if (this.getId().matches(that.getId())) {
-          for (int i = 0; i < this.getList().size(); i++) {
-            double wertA = this.getList().get(i).getWert();
-            double wertB = that.getList().get(i).getWert();
-            String stempelA = this.getList().get(i).getZeitstempel();
-            String stempelB = that.getList().get(i).getZeitstempel();
-            if (wertA != wertB) {
-              return false;
-            }
-            if (!stempelA.contains(stempelB)) {
-              return false;
-            }
-          }
-          return true;
+
+      // Vergleich der Listengroessen beider Objekte
+      if (this.getList().size() != that.getList().size())
+        return false;
+
+      // Vergleichen der ID´s
+      if (!this.getId().matches(that.getId()))
+        return false;
+
+      //Die Listen werden durchlaufen und die Werte verglichen
+      for (int i = 0; i < this.getList().size(); i++) {
+        double wertA = this.getList().get(i).getWert();
+        double wertB = that.getList().get(i).getWert();
+        String stempelA = this.getList().get(i).getZeitstempel();
+        String stempelB = that.getList().get(i).getZeitstempel();
+        if (wertA != wertB) {
+          return false;
+        }
+        if (!stempelA.contains(stempelB)) {
+          return false;
         }
       }
     }
-    return false;
-
+    return true;
   }
 
   public String getId() {
