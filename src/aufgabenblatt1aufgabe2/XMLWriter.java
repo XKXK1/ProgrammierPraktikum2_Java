@@ -37,10 +37,10 @@ public class XMLWriter {
 	            doc.appendChild(rootElement);
 	 
 	            //append first child element to root element
-	            rootElement.appendChild(getSensor(doc, "1", "Pankaj", "29", "Java Developer", "Male"));
+	            rootElement.appendChild(getSensor(doc, "1", "Pankaj", "29", "1400"));
 	 
 	            //append second child
-	            rootElement.appendChild(getSensor(doc, "2", "Lisa", "35", "Manager", "Female"));
+	            rootElement.appendChild(getSensor(doc, "2", "Lisa", "35", "20000"));
 	 
 	            //for output to file, console
 	            TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -51,7 +51,7 @@ public class XMLWriter {
 	 
 	            //write to console or file
 	            StreamResult console = new StreamResult(System.out);
-	            StreamResult file = new StreamResult(new File("/Users/pankaj/emps.xml"));
+	            StreamResult file = new StreamResult(new File("C:/Users/dry/Desktop/emps.xml"));
 	 
 	            //write data
 	            transformer.transform(source, console);
@@ -63,24 +63,21 @@ public class XMLWriter {
 	        }
 	    }
 	  
-	   private static Node getSensor(Document doc, String id, String name, String age, String role,
-	            String gender) {
+	   private static Node getSensor(Document doc, String id, String messung, String wert, String zeitstempel) {
 	        Element sensor = doc.createElement("Sensor");
 	 
 	        //set id attribute
 	        sensor.setAttribute("id", id);
 	 
-	        //create name element
-	        sensor.appendChild(getSensorElements(doc, sensor, "name", name));
-	 
-	        //create age element
-	        sensor.appendChild(getSensorElements(doc, sensor, "age", age));
-	 
-	        //create role element
-	        sensor.appendChild(getSensorElements(doc, sensor, "role", role));
-	 
-	        //create gender element
-	        sensor.appendChild(getSensorElements(doc, sensor, "gender", gender));
+	        //create messung element
+	        sensor.appendChild(getSensorElements(doc, sensor, "messung", messung));
+	        
+	        
+	        sensor.setAttribute("wert", wert);
+	        
+	        sensor.setAttribute("zeitstempel", zeitstempel);
+
+
 	 
 	        return sensor;
 	    }
