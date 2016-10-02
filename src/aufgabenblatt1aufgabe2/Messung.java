@@ -9,7 +9,7 @@ public class Messung {
 		this.wert = wert;
 		this.zeitstempel = zeitstempel;
 		}
-
+	
 	@Override
 	public String toString() {
 		return "Messung [wert=" + wert + ", zeitstempel=" + zeitstempel + "]\n";
