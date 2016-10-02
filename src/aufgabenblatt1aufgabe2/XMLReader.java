@@ -43,16 +43,5 @@ public class XMLReader {
       list.add(i, new Messung(wert, zeitstempel));
     }
     return new Sensor(sensorID, list);
-  }
-
-  public static void main(String[] args)
-      throws ParserConfigurationException, SAXException, IOException {
-    XMLReader auslesung = new XMLReader(
-        "C:/Users/Saintsaw/git/TeamRocket/PM2/src/aufgabenblatt1aufgabe2/sensor.xml");
-
-    Sensor test = auslesung.reader();
-
-    System.out.println(test);
-
-  }
+  }  
 }
