@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sensor {
-	private String id;
-	List<Messung> list = new ArrayList<Messung>();
-	
-	public Sensor(String id, List<Messung> messungen){
-		this.id = id; 
-		list = messungen;
-	}
+  private String id;
+  List<Messung> list = new ArrayList<Messung>();
+
+  public Sensor(String id, List<Messung> messungen) {
+    this.id = id;
+    list = messungen;
+  }
 
   @Override
   public String toString() {
@@ -19,6 +19,5 @@ public class Sensor {
 
   public static void main(String[] args) {
 
-	
-	}
+  }
 }
