@@ -19,11 +19,22 @@ import org.xml.sax.SAXException;
 public class XMLReader {
   private Document document;
 
-  public XMLReader(String dateipfad)
-      throws ParserConfigurationException, SAXException, IOException {
+  public XMLReader(String dateipfad){
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder = factory.newDocumentBuilder();
-    document = builder.parse(new File(dateipfad));
+    DocumentBuilder builder;
+    try {
+      builder = factory.newDocumentBuilder();
+      document = builder.parse(new File(dateipfad));
+    } catch (ParserConfigurationException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (SAXException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   public Sensor reader() {
