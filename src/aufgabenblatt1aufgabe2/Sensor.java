@@ -11,6 +11,14 @@ public class Sensor {
     this.id = id;
     list = messungen;
   }
+  
+  public String getId() {
+    return id;
+  }
+
+  public List<Messung> getList() {
+    return list;
+  }
 
   @Override
   public String toString() {

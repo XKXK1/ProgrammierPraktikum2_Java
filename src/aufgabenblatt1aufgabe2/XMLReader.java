@@ -42,7 +42,6 @@ public class XMLReader {
       String zeitstempel = messung.getAttribute("zeitstempel");
       list.add(i, new Messung(wert, zeitstempel));
     }
-
     return new Sensor(sensorID, list);
   }
 

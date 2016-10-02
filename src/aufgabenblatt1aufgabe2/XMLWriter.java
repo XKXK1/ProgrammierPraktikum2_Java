@@ -6,8 +6,13 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Node;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,74 +24,72 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class XMLWriter {
+  
+  DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+  DocumentBuilder dBuilder;
+    
+  public void writer(Sensor sensor1, String dateipfad){
+    try {
+      dBuilder = dbFactory.newDocumentBuilder();
+      Document doc = dBuilder.newDocument();
+      // Hinzufuegen der Elemente zum Dokument
+      Element rootElement = doc.createElement("Sensor");
+      rootElement.setAttribute("ID", sensor1.getId());
+      // Wurzel-Element an das Dokument anhaengen
+      doc.appendChild(rootElement);
+      
+      for(int i=0; i<sensor1.list.size(); i++){
+      // Kind-Element an das Wurzel-Element anhaengen
+       rootElement.appendChild(getSensor(doc, Double.toString(sensor1.list.get(i).getWert()), sensor1.list.get(i).getZeitstempel()));
+      }
+       
+      // for output to file, console
+      TransformerFactory transformerFactory = TransformerFactory.newInstance();
+      Transformer transformer = transformerFactory.newTransformer();
+      // for pretty print
+      transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+      DOMSource source = new DOMSource(doc);
+
+      // write to console or file
+      StreamResult console = new StreamResult(System.out);
+      StreamResult file = new StreamResult(new File(dateipfad));
+
+      // write data
+      transformer.transform(source, console);
+      transformer.transform(source, file);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  
+  private Node getSensor(Document doc, String wert, String zeitstempel) {
+    Element sensor = doc.createElement("Messung");
+
+    // set id attribute
+    sensor.setAttribute("Wert", wert);
+    
+    sensor.setAttribute("Zeitstempel", zeitstempel);
+
+    return sensor;
+  }
 
 	public static void main(String[] args) {
 		List<Messung> list = new ArrayList<>();
 		list.add(new Messung(2.5,"1400"));
+		list.add(new Messung(3.2,"jetzt"));
+
 		Sensor sensor1 = new Sensor("wohnzimmer", list);
 		
+		XMLWriter xmlwriter = new XMLWriter();
 		
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder;
-
-		try {
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.newDocument();
-			// add elements to Document
-			Element rootElement = doc.createElementNS(sensor1.getID(),"Sensor" );
-			// append root element to document
-			doc.appendChild(rootElement);
-
-			// append first child element to root element
-			 rootElement.appendChild(getSensor(doc, "1", "Pankaj", "29", "1400"));
-
-			// for output to file, console
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			// for pretty print
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			DOMSource source = new DOMSource(doc);
-
-			// write to console or file
-			StreamResult console = new StreamResult(System.out);
-			StreamResult file = new StreamResult(new File("C:/Users/dry/Desktop/emps.xml"));
-
-			// write data
-			transformer.transform(source, console);
-			transformer.transform(source, file);
-			System.out.println("DONE");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		xmlwriter.writer(sensor1, "C:/Users/Saintsaw/Desktop/blub.xml");
+	
 	}
-
-	private static Node getSensor(Document doc, String id, String messung, String wert, String zeitstempel) {
-		Element sensor = doc.createElement("Sensor");
-
-		// set id attribute
-		sensor.setAttribute("id", id);
-
-		// create messung element
-		sensor.appendChild(getSensorElements(doc, sensor, "messung", messung));
-
-		sensor.setAttribute("wert", wert);
-
-		sensor.setAttribute("zeitstempel", zeitstempel);
-
-		return sensor;
-	}
-
-	// utility method to create text node
-	private static Node getSensorElements(Document doc, Element element, String name, String value) {
-		Element node = doc.createElement(name);
-		node.appendChild(doc.createTextNode(value));
-		return node;
-	}
-
 }

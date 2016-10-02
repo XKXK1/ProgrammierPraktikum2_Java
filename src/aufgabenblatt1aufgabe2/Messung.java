@@ -10,6 +10,14 @@ public class Messung {
     this.zeitstempel = zeitstempel;
   }
 
+  public double getWert() {
+    return wert;
+  }
+
+  public String getZeitstempel() {
+    return zeitstempel;
+  }
+
   @Override
   public String toString() {
     return "Messung [wert=" + wert + ", zeitstempel=" + zeitstempel + "]\n";
