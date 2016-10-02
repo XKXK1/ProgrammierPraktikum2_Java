@@ -11,8 +11,8 @@ public class Sensor {
 		this.id = id; 
 		list = messungen;
 	}
-	
-	public static void main(String[] args) {
+
+  public static void main(String[] args) {
 
 	
 	}
