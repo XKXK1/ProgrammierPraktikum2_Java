@@ -37,9 +37,9 @@ public class XMLReader {
       for (int i = 0; i < messungList.getLength(); i++) {
         Node p = messungList.item(i);
         Element messung = (Element) p;
-        String wert = messung.getAttribute("wert");
+        double wert = Double.parseDouble(messung.getAttribute("wert"));
         String zeitstempel = messung.getAttribute("zeitstempel");
-        list.add(i, new Messung(Double.parseDouble(wert), zeitstempel));
+        list.add(i, new Messung(wert, zeitstempel));
       }
 
     return new Sensor(sensorID, list);
@@ -49,6 +49,8 @@ public class XMLReader {
 		  XMLReader auslesung = new XMLReader("C:/Users/Saintsaw/git/TeamRocket/PM2/src/aufgabenblatt1aufgabe2/sensor.xml");
 		  
 		  Sensor test = auslesung.reader();
+		  
+		  System.out.println(test);
 
 	}
 }
