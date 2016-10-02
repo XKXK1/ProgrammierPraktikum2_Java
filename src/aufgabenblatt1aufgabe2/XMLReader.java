@@ -18,39 +18,42 @@ import org.xml.sax.SAXException;
 
 public class XMLReader {
   private Document document;
-  
-  public XMLReader(String dateipfad) throws ParserConfigurationException, SAXException, IOException{
+
+  public XMLReader(String dateipfad)
+      throws ParserConfigurationException, SAXException, IOException {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     document = builder.parse(new File(dateipfad));
   }
-  
-  public Sensor reader(){
+
+  public Sensor reader() {
 
     NodeList sensorList = document.getElementsByTagName("Sensor");
-      Node f = sensorList.item(0);
-      Element sensor = (Element) f;
-      String sensorID = sensor.getAttribute("id");
+    Node f = sensorList.item(0);
+    Element sensor = (Element) f;
+    String sensorID = sensor.getAttribute("id");
 
-      List<Messung>list = new ArrayList<>();
-      NodeList messungList = document.getElementsByTagName("Messung");
-      for (int i = 0; i < messungList.getLength(); i++) {
-        Node p = messungList.item(i);
-        Element messung = (Element) p;
-        double wert = Double.parseDouble(messung.getAttribute("wert"));
-        String zeitstempel = messung.getAttribute("zeitstempel");
-        list.add(i, new Messung(wert, zeitstempel));
-      }
+    List<Messung> list = new ArrayList<>();
+    NodeList messungList = document.getElementsByTagName("Messung");
+    for (int i = 0; i < messungList.getLength(); i++) {
+      Node p = messungList.item(i);
+      Element messung = (Element) p;
+      double wert = Double.parseDouble(messung.getAttribute("wert"));
+      String zeitstempel = messung.getAttribute("zeitstempel");
+      list.add(i, new Messung(wert, zeitstempel));
+    }
 
     return new Sensor(sensorID, list);
   }
- 
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException{
-		  XMLReader auslesung = new XMLReader("C:/Users/Saintsaw/git/TeamRocket/PM2/src/aufgabenblatt1aufgabe2/sensor.xml");
-		  
-		  Sensor test = auslesung.reader();
-		  
-		  System.out.println(test);
 
-	}
+  public static void main(String[] args)
+      throws ParserConfigurationException, SAXException, IOException {
+    XMLReader auslesung = new XMLReader(
+        "C:/Users/Saintsaw/git/TeamRocket/PM2/src/aufgabenblatt1aufgabe2/sensor.xml");
+
+    Sensor test = auslesung.reader();
+
+    System.out.println(test);
+
+  }
 }
