@@ -59,11 +59,6 @@ public class Sensor {
     return list;
   }
 
-  @Override
-  public String toString() {
-    return "Sensor [id=" + id + ", list=" + list + "]";
-  }
-
   public static void main(String[] args) {
 
   }

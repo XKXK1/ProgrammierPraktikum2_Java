@@ -17,9 +17,4 @@ public class Messung {
   public String getZeitstempel() {
     return zeitstempel;
   }
-
-  @Override
-  public String toString() {
-    return "Messung [wert=" + wert + ", zeitstempel=" + zeitstempel + "]\n";
-  }
 }
