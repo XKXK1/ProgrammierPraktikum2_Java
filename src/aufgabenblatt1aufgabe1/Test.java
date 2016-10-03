@@ -10,21 +10,17 @@ public class Test {
 	public static void main(String[] args) {
 		CompareName cn1 = new CompareName();
 
-		Student derya = new Student("derya", "uyargil", 8810);
+		Student derya = new Student("derya", "uyargil", 6510);
 		Student daniel = new Student("daniel", "drathen", 6077);
 		System.out.println("CompareTo zeigt :: " + derya.compareTo(daniel));
-		List<Student> list = new ArrayList<Student>();
+		
+		daniel.list.add(new Pruefungsleistung(5,"mathe"));
+		daniel.list.add(new Pruefungsleistung(5,"mathe"));
+		System.out.println(daniel);
 
-		list.add(derya);
-		list.add(daniel);
-
-		Collections.sort(list);
-
-		for (Student a : list) {
-			System.out.println(a.getVorname());
-		}
-
-		int result = derya.compareTo(daniel);
+		
+		
+			int result = derya.compareTo(daniel);
 
 		if (result < 0) {
 			System.out.println(derya.getVorname() + " hat eine kleinere Matrikelnummer als " + daniel.getVorname());
@@ -43,5 +39,6 @@ public class Test {
 			System.out.println(derya.getVorname() + " <- gleiche stelle im alphabet -> " + daniel.getVorname());
 		}
 	}
+	
 
 }

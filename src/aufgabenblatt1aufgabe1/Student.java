@@ -3,18 +3,19 @@ package aufgabenblatt1aufgabe1;
 import java.util.ArrayList;
 import java.util.List;
 
+import aufgabenblatt1aufgabe2.Messung;
+
 public class Student implements Comparable<Student> {
 
 	private String vorname;
 	private String nachname;
 	private int matrikelnummer;
+	List<Pruefungsleistung> list = new ArrayList<Pruefungsleistung>();
 
 	public Student(String vorname, String nachname, int matrikelnummer) {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.matrikelnummer = matrikelnummer;
-		List<Pruefungsleistung> list1 = new ArrayList<Pruefungsleistung>();
-		list1.add(new Pruefungsleistung(5,"mathe"));
 	}
 
 	public boolean equals(Student other) {
@@ -31,6 +32,12 @@ public class Student implements Comparable<Student> {
 		} else
 			return 0;
 
+	}
+
+	@Override
+	public String toString() {
+		return "Student [vorname=" + vorname + ", nachname=" + nachname + ", matrikelnummer=" + matrikelnummer
+				+ ", list=" + list.toString() + "]";
 	}
 
 	@Override

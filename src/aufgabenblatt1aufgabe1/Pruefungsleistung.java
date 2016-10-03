@@ -12,4 +12,9 @@ public class Pruefungsleistung {
 	 * test
 	 */
 
+	@Override
+	public String toString() {
+		return "Pruefungsleistung [note=" + note + ", modulname=" + modulname + "]";
+	}
+
 }
