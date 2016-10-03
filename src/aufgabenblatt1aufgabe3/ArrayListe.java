@@ -4,16 +4,21 @@ import java.lang.reflect.Array;
 
 public class ArrayListe<T> {
   private int anzahlElemente;
-  private T[] elemente;
-
+  private Object[] elemente;
+  
   public ArrayListe() {
-    final T[] element = (T[]) Array.newInstance(elemente.getClass(), 2);
-    this.elemente = element;
+    Object[] elemente = new Object[2];
+  }
+
+
+  public ArrayListe(T... element) {
+    Object[] elemente = new Object[element.length];
+    this.elemente[0] = (Object[])element;
   }
 
   public void hinzufuegen(T element) {
     if (getAnzahlElemente() == elemente.length){
-      final T[] duplicate = (T[]) Array.newInstance(element.getClass(), elemente.length*2);
+      Object[] duplicate = new Object[elemente.length*2];
       System.arraycopy( elemente, 0, duplicate, 0, elemente.length );
       elemente = (T[]) duplicate;
     }
@@ -23,15 +28,19 @@ public class ArrayListe<T> {
   }
 
   public T get(int index) {
-    return null;
+    return (T) elemente[index];
   }
 
   public void entfernen(T element) {
 
+    anzahlElemente--;
   }
 
   public void entferneElementAnIndex(int index) {
-
+    for (int i = index; i< elemente.length-1; i++){
+      elemente[i]=elemente[i+1];
+    }
+    anzahlElemente--;
   }
 
   public int getAnzahlElemente() {
@@ -40,7 +49,11 @@ public class ArrayListe<T> {
 
   @Override
   public String toString() {
-    return "nichts";
+    String ausgabe = "";
+    for (int i = 0; i<elemente.length;i++){
+      ausgabe += elemente[i] + "\n";
+    }
+    return ausgabe;
   }
 
   public T getKleinstesElement() {
@@ -49,9 +62,7 @@ public class ArrayListe<T> {
   
   public static void main(String[] args){
     ArrayListe<String> testListe = new ArrayListe<String>();
-    testListe.hinzufuegen("John Cena");
-    testListe.hinzufuegen("Kartoffelpuffer");
-    testListe.hinzufuegen("penis");
+
     
     System.out.println(testListe.anzahlElemente);
     
