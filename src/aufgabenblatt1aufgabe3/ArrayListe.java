@@ -3,18 +3,9 @@ package aufgabenblatt1aufgabe3;
 import java.lang.reflect.Array;
 
 public class ArrayListe<T> {
-  private int anzahlElemente;
-  private Object[] elemente;
+  private int anzahlElemente = 0;
+  private Object[] elemente = new Object[2];
   
-  public ArrayListe() {
-    Object[] elemente = new Object[2];
-  }
-
-
-  public ArrayListe(T... element) {
-    Object[] elemente = new Object[element.length];
-    this.elemente[0] = (Object[])element;
-  }
 
   public void hinzufuegen(T element) {
     if (getAnzahlElemente() == elemente.length){
@@ -22,7 +13,7 @@ public class ArrayListe<T> {
       System.arraycopy( elemente, 0, duplicate, 0, elemente.length );
       elemente = (T[]) duplicate;
     }
-      elemente[anzahlElemente] = element;
+      elemente[anzahlElemente] = (Object)element;
       anzahlElemente++;
 
   }
@@ -62,6 +53,11 @@ public class ArrayListe<T> {
   
   public static void main(String[] args){
     ArrayListe<String> testListe = new ArrayListe<String>();
+    testListe.hinzufuegen("Hans");
+    testListe.hinzufuegen("Hipster");
+    testListe.hinzufuegen("Chill");
+    testListe.hinzufuegen("Peter");
+    
 
     
     System.out.println(testListe.anzahlElemente);
