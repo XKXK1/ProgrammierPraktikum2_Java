@@ -12,16 +12,23 @@ public class Student implements Comparable<Student> {
 	private int matrikelnummer;
 	List<Pruefungsleistung> list = new ArrayList<Pruefungsleistung>();
 
+	/**
+	 * Konstruktor fuer die Klasse Student mit Vorname(String), Nachname(String) und Matrikelnummer(int)
+	 * @param vorname
+	 * @param nachname
+	 * @param matrikelnummer
+	 */
 	public Student(String vorname, String nachname, int matrikelnummer) {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.matrikelnummer = matrikelnummer;
 	}
 
-	public boolean equals(Student other) {
-		return this.getMatrikelnummer() == other.getMatrikelnummer();
-	}
-
+	
+	/**
+	 * Ueberschreiben der compareTo Methode. Zwei Studentenobjekte sind genau dann gleich,
+	 * wenn sie die gleiche Matrikelnummer haben.
+	 */
 	@Override
 	public int compareTo(Student other) {
 
@@ -40,6 +47,9 @@ public class Student implements Comparable<Student> {
 				+ ", list=" + list.toString() + "]";
 	}
 
+	/**
+	 * Ueberschreiben der hashCode Methode damit zwei elemente mit gleicher matrikelnummer auch wirklich gleich sind.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -48,6 +58,9 @@ public class Student implements Comparable<Student> {
 		return result;
 	}
 
+	/**
+	 * Vergleicht hashcodes von 2 Matrikelnummern.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -57,9 +70,9 @@ public class Student implements Comparable<Student> {
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		if (matrikelnummer != other.matrikelnummer)
-			return false;
-		return true;
+		if (matrikelnummer == other.matrikelnummer)
+			return true;
+		return false;
 	}
 
 	public String getVorname() {

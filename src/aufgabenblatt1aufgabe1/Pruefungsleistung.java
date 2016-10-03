@@ -9,7 +9,8 @@ public class Pruefungsleistung {
 		this.modulname = modulname;
 	}
 	/**
-	 * test
+	 * Ueberschreiben der toString Methode
+	 *  Note und Modulname werden ausgegeben.
 	 */
 
 	@Override

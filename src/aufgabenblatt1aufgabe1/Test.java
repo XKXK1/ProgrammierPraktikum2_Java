@@ -10,8 +10,14 @@ public class Test {
 	public static void main(String[] args) {
 		CompareName cn1 = new CompareName();
 
-		Student derya = new Student("derya", "uyargil", 6510);
-		Student daniel = new Student("daniel", "drathen", 6077);
+		Student derya = new Student("derya", "uyargil", 6410);
+		Student daniel = new Student("daniel", "drathen", 6510);
+		if (derya.equals(daniel)){
+			System.out.println("Matrikelnummern sind gleich");
+		} else {
+			System.out.println("Matrikelnummern sind nicht gleich");
+		}
+		
 		System.out.println("CompareTo zeigt :: " + derya.compareTo(daniel));
 		
 		daniel.list.add(new Pruefungsleistung(5,"mathe"));
