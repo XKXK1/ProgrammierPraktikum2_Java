@@ -15,7 +15,7 @@ public class ArrayListe<T> {
 
   }
 
-  //test
+ //LOOLOOO
   public T get(int index) {
     try {
       return (T) elemente[index];
