@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,14 +83,15 @@ public class XMLWriter {
 
 	public static void main(String[] args) {
 		List<Messung> list = new ArrayList<>();
-		list.add(new Messung(2.5,"1400"));
-		list.add(new Messung(3.2,"jetzt"));
+		list.add(new Messung(2.5, LocalDateTime.now().toString()));
+		list.add(new Messung(3.2, LocalDateTime.now().toString()));
+		list.add(new Messung(6.2, LocalDateTime.now().toString()));
 
 		Sensor sensor1 = new Sensor("wohnzimmer", list);
 		
 		XMLWriter xmlwriter = new XMLWriter();
 		
-		xmlwriter.writer(sensor1, "C:/Users/Saintsaw/Desktop/blub.xml");
+		xmlwriter.writer(sensor1, "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
 	
 	}
 }

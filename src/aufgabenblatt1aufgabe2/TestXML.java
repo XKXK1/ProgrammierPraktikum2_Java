@@ -17,7 +17,7 @@ public class TestXML {
     Sensor testSensor = new Sensor("Temperatur Wohnzimmer", testList);
     XMLReader auslesung;
       auslesung = new XMLReader(
-          "C:/Users/Saintsaw/git/TeamRocket/PM2/src/aufgabenblatt1aufgabe2/sensor.xml");
+          "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/sensor.xml");
 
       Sensor test = auslesung.reader();
       

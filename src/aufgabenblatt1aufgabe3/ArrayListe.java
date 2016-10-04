@@ -15,6 +15,7 @@ public class ArrayListe<T> {
 
   }
 
+  //test
   public T get(int index) {
     try {
       return (T) elemente[index];
