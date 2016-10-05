@@ -51,7 +51,12 @@ public class Sensor {
     return true;
   }
 
-  public String getId() {
+  @Override
+public String toString() {
+	return "Sensor [id=" + id + ", list=" + list + "]";
+}
+
+public String getId() {
     return id;
   }
 

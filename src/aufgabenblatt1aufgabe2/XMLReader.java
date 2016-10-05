@@ -54,5 +54,14 @@ public class XMLReader {
       list.add(i, new Messung(wert, zeitstempel));
     }
     return new Sensor(sensorID, list);
-  }  
+  }
+  
+  
+  public static void main(String [] args){
+	  XMLReader test = new XMLReader("Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/sensor.xml");
+	  
+	  Sensor senior = test.reader();
+	  
+	  System.out.println(senior.toString());
+  }
 }

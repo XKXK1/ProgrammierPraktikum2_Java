@@ -41,7 +41,7 @@ public class XMLWriter {
       Document doc = dBuilder.newDocument();
       // Hinzufuegen der Elemente zum Dokument
       Element rootElement = doc.createElement("Sensor");
-      rootElement.setAttribute("ID", sensor1.getId());
+      rootElement.setAttribute("id", sensor1.getId());
       // Wurzel-Element an das Dokument anhaengen
       doc.appendChild(rootElement);
       
@@ -74,9 +74,9 @@ public class XMLWriter {
     Element sensor = doc.createElement("Messung");
 
     // set id attribute
-    sensor.setAttribute("Wert", wert);
+    sensor.setAttribute("wert", wert);
     
-    sensor.setAttribute("Zeitstempel", zeitstempel);
+    sensor.setAttribute("zeitstempel", zeitstempel);
 
     return sensor;
   }
