@@ -7,44 +7,48 @@ import java.util.List;
 
 public class Test {
 
-	public static void main(String[] args) {
-		CompareName cn1 = new CompareName();
+  public static void main(String[] args) {
+    CompareName cn1 = new CompareName();
 
-		Student derya = new Student("derya", "uyargil", 6410);
-		Student daniel = new Student("daniel", "drathen", 6510);
-		if (derya.equals(daniel)){
-			System.out.println("Matrikelnummern sind gleich");
-		} else {
-			System.out.println("Matrikelnummern sind nicht gleich");
-		}
-		
-		System.out.println("CompareTo zeigt :: " + derya.compareTo(daniel));
-		
-		daniel.list.add(new Pruefungsleistung(5,"mathe"));
-		daniel.list.add(new Pruefungsleistung(5,"mathe"));
-		System.out.println(daniel);
+    Student derya = new Student("derya", "uyargil", 6410);
+    Student daniel = new Student("daniel", "drathen", 6510);
+    if (derya.equals(daniel)) {
+      System.out.println("Matrikelnummern sind gleich");
+    } else {
+      System.out.println("Matrikelnummern sind nicht gleich");
+    }
 
-		
-		
-			int result = derya.compareTo(daniel);
+    System.out.println("CompareTo zeigt :: " + derya.compareTo(daniel));
 
-		if (result < 0) {
-			System.out.println(derya.getVorname() + " hat eine kleinere Matrikelnummer als " + daniel.getVorname());
-		} else if (result > 0) {
-			System.out.println(derya.getVorname() + " hat eine groessere Matrikelnummer als " + daniel.getVorname());
-		} else {
-			System.out.println(derya.getVorname() + " hat die gleiche Matrikelnummer wie " + daniel.getVorname());
-		}
-		int resultName = cn1.compare(derya, daniel);
+    daniel.list.add(new Pruefungsleistung(5, "mathe"));
+    daniel.list.add(new Pruefungsleistung(5, "mathe"));
+    System.out.println(daniel);
 
-		if (resultName < 0) {
-			System.out.println(derya.getVorname() + " <- kommt vor diesem Namen im Alphabet -> " + daniel.getVorname());
-		} else if (resultName > 0) {
-			System.out.println(derya.getVorname() + " <- kommt nach diesem Namen im Alphabet -> " + daniel.getVorname());
-		} else {
-			System.out.println(derya.getVorname() + " <- gleiche stelle im alphabet -> " + daniel.getVorname());
-		}
-	}
-	
+    int result = derya.compareTo(daniel);
+
+    if (result < 0) {
+      System.out.println(derya.getVorname()
+          + " hat eine kleinere Matrikelnummer als " + daniel.getVorname());
+    } else if (result > 0) {
+      System.out.println(derya.getVorname()
+          + " hat eine groessere Matrikelnummer als " + daniel.getVorname());
+    } else {
+      System.out.println(derya.getVorname()
+          + " hat die gleiche Matrikelnummer wie " + daniel.getVorname());
+    }
+    int resultName = cn1.compare(derya, daniel);
+
+    if (resultName < 0) {
+      System.out.println(derya.getVorname()
+          + " <- kommt vor diesem Namen im Alphabet -> " + daniel.getVorname());
+    } else if (resultName > 0) {
+      System.out.println(
+          derya.getVorname() + " <- kommt nach diesem Namen im Alphabet -> "
+              + daniel.getVorname());
+    } else {
+      System.out.println(derya.getVorname()
+          + " <- gleiche stelle im alphabet -> " + daniel.getVorname());
+    }
+  }
 
 }
