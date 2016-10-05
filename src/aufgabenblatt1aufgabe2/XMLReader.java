@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 public class XMLReader {
   private Document document;
 
-  public XMLReader(String dateipfad){
+  public XMLReader(String dateipfad) {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder;
     try {
@@ -55,13 +55,13 @@ public class XMLReader {
     }
     return new Sensor(sensorID, list);
   }
-  
-  
-  public static void main(String [] args){
-	  XMLReader test = new XMLReader("Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/sensor.xml");
-	  
-	  Sensor senior = test.reader();
-	  
-	  System.out.println(senior.toString());
+
+  public static void main(String[] args) {
+    XMLReader test = new XMLReader(
+        "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/sensor.xml");
+
+    Sensor senior = test.reader();
+
+    System.out.println(senior.toString());
   }
 }

@@ -31,11 +31,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class XMLWriter {
-  
+
   DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
   DocumentBuilder dBuilder;
-    
-  public void writer(Sensor sensor1, String dateipfad){
+
+  public void writer(Sensor sensor1, String dateipfad) {
     try {
       dBuilder = dbFactory.newDocumentBuilder();
       Document doc = dBuilder.newDocument();
@@ -44,12 +44,14 @@ public class XMLWriter {
       rootElement.setAttribute("id", sensor1.getId());
       // Wurzel-Element an das Dokument anhaengen
       doc.appendChild(rootElement);
-      
-      for(int i=0; i<sensor1.list.size(); i++){
-      // Kind-Element an das Wurzel-Element anhaengen
-       rootElement.appendChild(getSensor(doc, Double.toString(sensor1.list.get(i).getWert()), sensor1.list.get(i).getZeitstempel()));
+
+      for (int i = 0; i < sensor1.list.size(); i++) {
+        // Kind-Element an das Wurzel-Element anhaengen
+        rootElement.appendChild(
+            getSensor(doc, Double.toString(sensor1.list.get(i).getWert()),
+                sensor1.list.get(i).getZeitstempel()));
       }
-       
+
       // for output to file, console
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();
@@ -69,29 +71,30 @@ public class XMLWriter {
       e.printStackTrace();
     }
   }
-  
+
   private Node getSensor(Document doc, String wert, String zeitstempel) {
     Element sensor = doc.createElement("Messung");
 
     // set id attribute
     sensor.setAttribute("wert", wert);
-    
+
     sensor.setAttribute("zeitstempel", zeitstempel);
 
     return sensor;
   }
 
-	public static void main(String[] args) {
-		List<Messung> list = new ArrayList<>();
-		list.add(new Messung(2.5, LocalDateTime.now().toString()));
-		list.add(new Messung(3.2, LocalDateTime.now().toString()));
-		list.add(new Messung(6.2, LocalDateTime.now().toString()));
+  public static void main(String[] args) {
+    List<Messung> list = new ArrayList<>();
+    list.add(new Messung(2.5, LocalDateTime.now().toString()));
+    list.add(new Messung(3.2, LocalDateTime.now().toString()));
+    list.add(new Messung(6.2, LocalDateTime.now().toString()));
 
-		Sensor sensor1 = new Sensor("wohnzimmer", list);
-		
-		XMLWriter xmlwriter = new XMLWriter();
-		
-		xmlwriter.writer(sensor1, "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
-	
-	}
+    Sensor sensor1 = new Sensor("wohnzimmer", list);
+
+    XMLWriter xmlwriter = new XMLWriter();
+
+    xmlwriter.writer(sensor1,
+        "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
+
+  }
 }

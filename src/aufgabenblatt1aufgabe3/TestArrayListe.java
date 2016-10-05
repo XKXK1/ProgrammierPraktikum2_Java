@@ -55,19 +55,18 @@ public class TestArrayListe {
         testListe.getAnzahlElemente());
   }
 
-  
   @Test
-  public void testClassAbfrage(){
+  public void testClassAbfrage() {
     ArrayListe<Integer> testListe1 = new ArrayListe<Integer>();
     testListe1.hinzufuegen(1);
     testListe1.hinzufuegen(2);
-    
+
     ArrayListe<Integer> testListe2 = new ArrayListe<Integer>();
-    
+
     ArrayListe<String> testListe3 = new ArrayListe<String>();
     testListe3.hinzufuegen("test");
     testListe3.hinzufuegen("");
-        
+
     assertTrue(ListenTester.listenTest(testListe1));
     assertTrue(!ListenTester.listenTest(testListe2));
     assertTrue(!ListenTester.listenTest(testListe3));

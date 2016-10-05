@@ -74,24 +74,4 @@ public class ArrayListe<T extends Comparable<T>> {
     }
     return kleinstes_element;
   }
-
-  public static void main(String[] args) {
-
-    ArrayListe<String> testListe = new ArrayListe<String>();
-    testListe.hinzufuegen("Adam");
-    testListe.hinzufuegen("Bdam");
-    testListe.hinzufuegen("Cdam");
-    testListe.hinzufuegen("Ddam");
-
-    System.out.println(testListe);
-
-    testListe.entferneElementAnIndex(6);
-
-    System.out.println(testListe);
-    System.out.println(testListe.getAnzahlElemente());
-    System.out.println(testListe.getKleinstesElement());
-
-    testListe.get(4);
-
-  }
 }

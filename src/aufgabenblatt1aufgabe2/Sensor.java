@@ -13,13 +13,13 @@ public class Sensor {
     this.id = id;
     list = messungen;
   }
-  
+
   /**
    * Equals-Methode für den XMLReader-Test
    */
   @Override
   public boolean equals(Object obj) {
-    if (obj.getClass()==null)
+    if (obj.getClass() == null)
       return false;
     // wenn beide Objekte die gleiche Klasse haben,
     if (obj instanceof Sensor) {
@@ -34,7 +34,7 @@ public class Sensor {
       if (!this.getId().matches(that.getId()))
         return false;
 
-      //Die Listen werden durchlaufen und die Werte verglichen
+      // Die Listen werden durchlaufen und die Werte verglichen
       for (int i = 0; i < this.getList().size(); i++) {
         double wertA = this.getList().get(i).getWert();
         double wertB = that.getList().get(i).getWert();
@@ -52,11 +52,11 @@ public class Sensor {
   }
 
   @Override
-public String toString() {
-	return "Sensor [id=" + id + ", list=" + list + "]";
-}
+  public String toString() {
+    return "Sensor [id=" + id + ", list=" + list + "]";
+  }
 
-public String getId() {
+  public String getId() {
     return id;
   }
 
