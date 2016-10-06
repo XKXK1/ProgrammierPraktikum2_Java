@@ -29,18 +29,23 @@ public class TestStudent {
     testListe1.add(student4);
     testListe1.add(student3);
 
+    //Student 3 sollte vor dem sortieren nicht an index(0) der Liste stehen
     assertNotEquals(student3, testListe1.get(0));
+    //Student 4 sollte vor dem sortieren nicht an index(3) der Liste stehen
     assertNotEquals(student4, testListe1.get(3));
 
+    //Liste wird nach Matrikelnummer sortiert
     Collections.sort(testListe1);
 
+    //Student 3 soll  an index(0) stehen, da er die kleinste Matrikelnummer hat
     assertEquals(student3, testListe1.get(0));
+    //Student 4 soll  an index(0) stehen, da er die groesste Matrikelnummer hat
     assertEquals(student4, testListe1.get(3));
 
   }
 
   /**
-   * Test der ueberschriebenen Equals-Methode. 2 Studenten sind genau dann
+   * Test der ueberschriebenen Equals-Methode. Zwei Studenten sind genau dann
    * gleich, wenn die Matrikelnummern gleich sind.
    */
   @Test
@@ -48,19 +53,21 @@ public class TestStudent {
     Student student1 = new Student("derya", "uyargil", 6410);
     Student student2 = new Student("daniel", "drathen", 6410);
 
+    //Die Matrikelnummern beider Studenten sind gleich
     assertTrue(student1.equals(student2));
 
     Student student3 = new Student("derya", "uyargil", 5410);
     Student student4 = new Student("daniel", "drathen", 6410);
-
+    
+    //Die Matrikelnummern beider Studenten sind unterschiedlich
     assertFalse(student3.equals(student4));
   }
 
   /**
    * Test der Klasse CompareName, welche Comparator implementiert. Wenn ein
-   * Student lexikographisch vor einem anderen steht, so liefert das ergebnis
-   * des Vergleichs -1 zurueck. Wenn beide gleich sind 0. Wenn ein Student nach
-   * einem anderen steht, so liefert er das ergebnis des Vergleichs 1 zurueck.
+   * Student lexikographisch vor einem anderen steht, so liefert das Ergebnis
+   * des Vergleichs "-1" zurueck. Wenn beide gleich sind "0". Wenn ein Student nach
+   * einem anderen steht, so liefert das Ergebnis des Vergleichs "1" zurueck.
    */
   @Test
   public void testComparator() {
