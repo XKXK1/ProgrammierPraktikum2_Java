@@ -5,6 +5,17 @@ import java.util.List;
 
 import aufgabenblatt1aufgabe2.Messung;
 
+/**
+ * 
+ * @author Derya Uyargil, Daniel von Drathen
+ * 
+ *         Die Klasse Student repraesentiert einen Studenten inkl. Vorname,
+ *         Nachname, Matrikelnummer und einer Liste seiner Pruefungsleistungen.
+ * 
+ *         Das Interface Comparable wird implementiert damit die Objekte der
+ *         Klasse Student mit der "compareTo" Methode verglichen werden koennen.
+ *
+ */
 public class Student implements Comparable<Student> {
 
 	private String vorname;
@@ -13,7 +24,9 @@ public class Student implements Comparable<Student> {
 	List<Pruefungsleistung> list = new ArrayList<Pruefungsleistung>();
 
 	/**
-	 * Konstruktor fuer die Klasse Student mit Vorname(String), Nachname(String) und Matrikelnummer(int)
+	 * Konstruktor fuer die Klasse Student mit Vorname(String), Nachname(String)
+	 * und Matrikelnummer(int)
+	 * 
 	 * @param vorname
 	 * @param nachname
 	 * @param matrikelnummer
@@ -24,10 +37,9 @@ public class Student implements Comparable<Student> {
 		this.matrikelnummer = matrikelnummer;
 	}
 
-	
 	/**
-	 * Ueberschreiben der compareTo Methode. Zwei Studentenobjekte sind genau dann gleich,
-	 * wenn sie die gleiche Matrikelnummer haben.
+	 * Ueberschreiben der compareTo Methode. Zwei Studentenobjekte sind genau
+	 * dann gleich, wenn sie die gleiche Matrikelnummer haben.
 	 */
 	@Override
 	public int compareTo(Student other) {
@@ -48,7 +60,8 @@ public class Student implements Comparable<Student> {
 	}
 
 	/**
-	 * Ueberschreiben der hashCode Methode damit zwei elemente mit gleicher matrikelnummer auch wirklich gleich sind.
+	 * Ueberschreiben der hashCode Methode damit zwei elemente mit gleicher
+	 * matrikelnummer auch wirklich gleich sind.
 	 */
 	@Override
 	public int hashCode() {
@@ -59,7 +72,8 @@ public class Student implements Comparable<Student> {
 	}
 
 	/**
-	 * Vergleicht hashcodes von 2 Matrikelnummern.
+	 * Ueberschreiben der equals Methode,so dass zwei Objekte der Klasse Student
+	 * gleich sind, wenn sie die gleiche Matrikelnummer haben.
 	 */
 	@Override
 	public boolean equals(Object obj) {
