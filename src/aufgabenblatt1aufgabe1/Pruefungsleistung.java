@@ -3,7 +3,7 @@ package aufgabenblatt1aufgabe1;
  * 
  * @author Derya Uyargil, Daniel von Drathen
  * 
- * Die Objekt der Klasse Pruefungsleistung besteht aus "note"(int) und "modulname"(String).
+ * Ein Objekt der Klasse Pruefungsleistung besteht aus "note"(int) und "modulname"(String).
  * Er repraesentiert eine Pruefungsleistung eines Studenten.
  *
  */
