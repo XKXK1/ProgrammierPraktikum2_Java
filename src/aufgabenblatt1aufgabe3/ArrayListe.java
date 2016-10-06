@@ -76,6 +76,9 @@ public class ArrayListe<T extends Comparable<T>> {
 	 */
 	public void entferneElementAnIndex(int index) {
 		if (get(index) != null) {
+			/* Ueberschreibt das Element am uebergebene Index mit dem naechsten wert aus
+			 * der Liste. Dies Wiederholt er bis er am Ende der Liste angekommen ist.
+			 */
 			for (int i = index; i < elemente.length - 1; i++) {
 				elemente[i] = elemente[i + 1];
 			}
@@ -111,7 +114,7 @@ public class ArrayListe<T extends Comparable<T>> {
 		} 
 		T kleinstes_element = (T) elemente[0];
 		
-		for (int i = 0; i < anzahlElemente; i++) {
+		for (int i = 1; i < anzahlElemente; i++) {
 			if (kleinstes_element.compareTo((T) elemente[i]) > 0) {
 				kleinstes_element = (T) elemente[i];
 			}
