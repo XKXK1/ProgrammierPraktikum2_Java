@@ -11,7 +11,15 @@ import java.util.Comparator;
 public class CompareName implements Comparator<Student> {
 
 
-	
+	/**
+	 * Zuerst werden beide Nachnamen der Studenten vergleichen. Falls beide Namen
+	 * gleich sein sollten wird zusaetzlich vergleichen welcher Nachname lexikographisch
+	 * vor dem anderen kommt.
+	 * 
+	 * return -1 falls Name1 vor Name 2 kommt.
+	 * return  1 falls Name 1 nach Name 2 kommt.
+	 * return  0 falls beide Namen gleich sind.
+	 */
 	@Override
 	public int compare(Student student1, Student student2) {
 		if (student1.getNachname().compareTo(student2.getNachname()) < 0){
