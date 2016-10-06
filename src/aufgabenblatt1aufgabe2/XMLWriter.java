@@ -6,9 +6,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Node;
 import java.io.File;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -29,6 +26,13 @@ public class XMLWriter {
 	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder;
 
+	/**
+	 * Die Methode Writer() erwartet ein Sensor-Objekt und einen Dateipfad, an
+	 * welchem die Datei erstellt wird.
+	 * 
+	 * @param sensor1
+	 * @param dateipfad
+	 */
 	public void writer(Sensor sensor1, String dateipfad) {
 		try {
 			dBuilder = dbFactory.newDocumentBuilder();
@@ -41,14 +45,14 @@ public class XMLWriter {
 
 			for (int i = 0; i < sensor1.list.size(); i++) {
 				// Kind-Element an das Wurzel-Element anhaengen
-				rootElement.appendChild(getSensor(doc, Double.toString(sensor1.list.get(i).getWert()),
+				rootElement.appendChild(setzeMessung(doc, Double.toString(sensor1.list.get(i).getWert()),
 						sensor1.list.get(i).getZeitstempel()));
 			}
 
 			// zum Ausgeben der Datei an die Konsole
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
-			// for pretty print
+			// Zur schoenere Ausgabe
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource source = new DOMSource(doc);
 
@@ -66,36 +70,28 @@ public class XMLWriter {
 	}
 
 	/**
-	 * Die Methode getSensor dient zur Hilfe der Hauptmethode "writer()".
-	 * Ein Knotenobjekt wird aus den uergebenen Sensor Attributen erstellt.
+	 * Die Methode getSensor dient zur Hilfe der Hauptmethode "writer()". Ein
+	 * Knotenobjekt wird aus den uergebenen Sensor Attributen erstellt und
+	 * zurueckgeliefert.
+	 * 
 	 * @param doc
 	 * @param wert
 	 * @param zeitstempel
 	 * @return
 	 */
-	private Node getSensor(Document doc, String wert, String zeitstempel) {
-		// 
+	private Node setzeMessung(Document doc, String wert, String zeitstempel) {
+		// Element wird im Dokument erstellt
 		Element sensor = doc.createElement("Messung");
 
-		
+		// Element bekommt Attribut mit dem Namen "wert" dem inhalt des
+		// Argumentes "wert"
 		sensor.setAttribute("wert", wert);
 
+		// Element bekommt Attribut mit dem Namen "zeitstempel" dem inhalt des
+		// Argumentes "zeitstempel"
 		sensor.setAttribute("zeitstempel", zeitstempel);
 
 		return sensor;
 	}
 
-	public static void main(String[] args) {
-		List<Messung> list = new ArrayList<>();
-		list.add(new Messung(2.5, LocalDateTime.now().toString()));
-		list.add(new Messung(3.2, LocalDateTime.now().toString()));
-		list.add(new Messung(6.2, LocalDateTime.now().toString()));
-
-		Sensor sensor1 = new Sensor("wohnzimmer", list);
-
-		XMLWriter xmlwriter = new XMLWriter();
-
-		xmlwriter.writer(sensor1, "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
-
-	}
 }

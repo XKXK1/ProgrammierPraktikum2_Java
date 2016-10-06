@@ -8,39 +8,56 @@ import org.junit.Test;
 
 public class TestXML {
 
-  @Test
-  public void testXMLReader() {
-    List<Messung> testList = new ArrayList<Messung>();
-    testList.add(new Messung(23.2, "2016-06-23T16:51:40.408"));
-    testList.add(new Messung(24.5, "2016-06-24T12:12:52.000"));
-    Sensor testSensor = new Sensor("Temperatur Wohnzimmer", testList);
-    XMLReader auslesung;
-    auslesung = new XMLReader(
-        "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/sensor.xml");
+	/**
+	 * Es wird getestet, ob der XMLReader aus einer vorhandenen XML-Datei ein
+	 * richtiges Sensor-Objekt erstellt.
+	 */
+	@Test
+	public void testXMLReader() {
+		// Erstellen eines Test-Sensor-Objektes
+		List<Messung> testList = new ArrayList<Messung>();
+		testList.add(new Messung(23.2, "2016-06-23T16:51:40.408"));
+		testList.add(new Messung(24.5, "2016-06-24T12:12:52.000"));
+		Sensor testSensor = new Sensor("Temperatur Wohnzimmer", testList);
 
-    Sensor test = auslesung.reader();
+		// Auslesen einer vorhandenen Sensor-XML-Datei
+		XMLReader auslesung;
+		auslesung = new XMLReader("Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/sensor.xml");
 
-    assertTrue(test.equals(testSensor));
-  }
+		// Schreiben eines Sensor-Objektes aus der ausgelesenen XML-Datei
+		Sensor test = auslesung.reader();
 
-  @Test
-  public void testXMLWriter() {
+		// Equals-Vergleich der beiden Sensor-Objekte
+		assertTrue(test.equals(testSensor));
+	}
 
-    List<Messung> testList = new ArrayList<Messung>();
-    testList.add(new Messung(23.2, "2016-06-23T16:51:40.408"));
-    testList.add(new Messung(24.5, "2016-06-24T12:12:52.000"));
-    Sensor testSensor = new Sensor("Temperatur Wohnzimmer", testList);
+	/**
+	 * "Stille-Post-Prinizp" Es soll ueberprueft werden, ob der XML-Writer eine
+	 * gueltige XML-Datei aus einem Sensor erstellt. Dies wird durch den
+	 * XML-Reader ueberprueft
+	 */
+	@Test
+	public void testXMLWriter() {
 
-    XMLWriter xmlwriter = new XMLWriter();
+		// Erstellen eines Sensor-Objektes
+		List<Messung> testList = new ArrayList<Messung>();
+		testList.add(new Messung(23.2, "2016-06-23T16:51:40.408"));
+		testList.add(new Messung(24.5, "2016-06-24T12:12:52.000"));
+		Sensor testSensor = new Sensor("Temperatur Wohnzimmer", testList);
 
-    xmlwriter.writer(testSensor,
-        "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
+		XMLWriter xmlwriter = new XMLWriter();
 
-    XMLReader auslesung;
-    auslesung = new XMLReader(
-        "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
-    Sensor test = auslesung.reader();
+		// Erstellen einer XML-Datei aus dem Sensor-Objekt an dem angegebene
+		// Pfad
+		xmlwriter.writer(testSensor, "Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
 
-    assertTrue(test.equals(testSensor));
-  }
+		// Erstellung eines Sensor Objektes anhand der gerade erstellten
+		// XML-Datei
+		XMLReader auslesung;
+		auslesung = new XMLReader("Z:/PTP/Semester 2/pm2_teamrocket/src/aufgabenblatt1aufgabe2/blub.xml");
+		Sensor test = auslesung.reader();
+
+		// Vergleich der beiden Sensor-Objekte
+		assertTrue(test.equals(testSensor));
+	}
 }

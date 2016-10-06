@@ -3,8 +3,6 @@ package aufgabenblatt1aufgabe1;
 import java.util.ArrayList;
 import java.util.List;
 
-import aufgabenblatt1aufgabe2.Messung;
-
 /**
  * 
  * @author Derya Uyargil, Daniel von Drathen

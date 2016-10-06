@@ -7,14 +7,14 @@ import java.util.Comparator;
  * CompareMethode wird ueberschrieben damit zwei studenten anhand des Vornamens
  * lexikographisch verglichen werden koennen.
  * 
- * @author dry
+ * @author Derya Uyargil, Daniel von Drathen
  *
  */
 public class CompareName implements Comparator<Student> {
 
 	/**
-	 * Zuerst werden beide Nachnamen der Studenten vergleichen. Falls beide
-	 * Namen gleich sein sollten wird zusaetzlich vergleichen welcher Nachname
+	 * Zuerst werden beide Nachnamen der Studenten verglichen. Falls beide
+	 * Namen gleich sein sollten wird zusaetzlich verglichen welcher Vorname
 	 * lexikographisch vor dem anderen kommt.
 	 * 
 	 * return -1 falls Name1 vor Name 2 kommt. return 1 falls Name 1 nach Name 2
