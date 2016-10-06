@@ -7,6 +7,19 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+/**
+ * 
+ * @author Derya Uyargil, Daniel von Drathen
+ * 
+ * Testklasse mit 3 Test-Methoden.
+ * 
+ * testCompareTo()
+ * 
+ * testEquals()
+ * 
+ * testComparator()
+ *
+ */
 
 public class TestStudent {
   /**
