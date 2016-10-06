@@ -106,11 +106,12 @@ public class ArrayListe<T extends Comparable<T>> {
 	 * @return
 	 */
 	public T getKleinstesElement() {
-		T kleinstes_element = null;
+		if (anzahlElemente == 0) {
+			return null;
+		} 
+		T kleinstes_element = (T) elemente[0];
+		
 		for (int i = 0; i < anzahlElemente; i++) {
-			if (i == 0) {
-				kleinstes_element = (T) elemente[0];
-			}
 			if (kleinstes_element.compareTo((T) elemente[i]) > 0) {
 				kleinstes_element = (T) elemente[i];
 			}

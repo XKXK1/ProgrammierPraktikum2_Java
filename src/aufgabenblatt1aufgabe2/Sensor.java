@@ -14,11 +14,12 @@ import java.util.List;
  */
 public class Sensor {
 	private String id;
-	List<Messung> list = new ArrayList<Messung>();
+	private List<Messung> list;
 
 	public Sensor(String id, List<Messung> messungen) {
 		this.id = id;
 		list = messungen;
+		list = new ArrayList<Messung>();
 	}
 
 	/**
@@ -29,7 +30,7 @@ public class Sensor {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj.getClass() == null)
+		if (obj == null)
 			return false;
 		// wenn beide Objekte die gleiche Klasse haben,
 		if (obj instanceof Sensor) {
@@ -53,12 +54,20 @@ public class Sensor {
 				if (wertA != wertB) {
 					return false;
 				}
-				if (!stempelA.contains(stempelB)) {
+				if (!stempelA.equals(stempelB)) {
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+	
+	public List<Messung> getListe(){
+		List<Messung>ausgabeListe = new ArrayList<Messung>();
+		for(int i = 0; i<list.size(); i++){
+			ausgabeListe.add(list.get(i));
+		}
+		return ausgabeListe;
 	}
 
 	@Override
@@ -74,7 +83,4 @@ public class Sensor {
 		return list;
 	}
 
-	public static void main(String[] args) {
-
-	}
 }

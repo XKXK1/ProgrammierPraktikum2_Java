@@ -13,12 +13,6 @@ import org.junit.Test;
  * 
  * Testklasse mit 3 Test-Methoden.
  * 
- * testCompareTo()
- * 
- * testEquals()
- * 
- * testComparator()
- *
  */
 
 public class TestStudent {
@@ -87,6 +81,7 @@ public class TestStudent {
     CompareName comparator1 = new CompareName();
     Student student1 = new Student("Adam", "Drathen", 6410);
     Student student2 = new Student("Wolfgang", "Uyargil", 6410);
+    Student student3 = new Student("Betina", "Drathen", 6123);
 
     assertEquals("Fehler: Erwarteter Wert -1(Name kleiner)", -1,
         comparator1.compare(student1, student2));
@@ -96,6 +91,8 @@ public class TestStudent {
 
     assertEquals("Fehler: Erwarteter Wert 0(Namen gleich)", 0,
         comparator1.compare(student2, student2));
+    
+    assertEquals("Fehler: Es wurde -1 erwartet!", -1, comparator1.compare(student1, student3));
 
   }
 

@@ -19,7 +19,7 @@ public class Student implements Comparable<Student> {
 	private String vorname;
 	private String nachname;
 	private int matrikelnummer;
-	List<Pruefungsleistung> list = new ArrayList<Pruefungsleistung>();
+	private List<Pruefungsleistung> list;
 
 	/**
 	 * Konstruktor fuer die Klasse Student mit Vorname(String), Nachname(String)
@@ -33,6 +33,7 @@ public class Student implements Comparable<Student> {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.matrikelnummer = matrikelnummer;
+		list = new ArrayList<Pruefungsleistung>();
 	}
 
 	/**
@@ -41,14 +42,7 @@ public class Student implements Comparable<Student> {
 	 */
 	@Override
 	public int compareTo(Student other) {
-
-		if (getMatrikelnummer() > other.getMatrikelnummer()) {
-			return 1;
-		} else if (getMatrikelnummer() < other.getMatrikelnummer()) {
-			return -1;
-		} else
-			return 0;
-
+			return getMatrikelnummer()-other.getMatrikelnummer();
 	}
 
 	@Override
@@ -64,8 +58,9 @@ public class Student implements Comparable<Student> {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + matrikelnummer;
+		int result;
+		
+		result = prime * matrikelnummer;
 		return result;
 	}
 

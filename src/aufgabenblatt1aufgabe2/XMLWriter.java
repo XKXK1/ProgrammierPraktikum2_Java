@@ -43,10 +43,10 @@ public class XMLWriter {
 			// Wurzel-Element an das Dokument anhaengen
 			doc.appendChild(rootElement);
 
-			for (int i = 0; i < sensor1.list.size(); i++) {
+			for (int i = 0; i < sensor1.getList().size(); i++) {
 				// Kind-Element an das Wurzel-Element anhaengen
-				rootElement.appendChild(setzeMessung(doc, Double.toString(sensor1.list.get(i).getWert()),
-						sensor1.list.get(i).getZeitstempel()));
+				rootElement.appendChild(setzeMessung(doc, Double.toString(sensor1.getList().get(i).getWert()),
+						sensor1.getList().get(i).getZeitstempel()));
 			}
 
 			// zum Ausgeben der Datei an die Konsole
