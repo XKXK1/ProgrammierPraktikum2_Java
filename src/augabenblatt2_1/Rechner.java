@@ -5,28 +5,37 @@ import java.util.Map;
 import java.util.function.BinaryOperator;
 
 public class Rechner {
-  Operation op;
-  Map<Operation, BinaryOperator>aufgabe = new HashMap<Operation, BinaryOperator>();
-  aufgabe.put(ADDITION, BinaryOperator<String> binaryOpt = );
 
-  public double berechne(Operation rechenart, double wert1, double wert2) {
-
-    switch (rechenart) {
-      case ADDITION :
-        return wert1 + wert2;
-      case SUBTRAKTION :
-        return wert1 - wert2;
-      case DIVISION :
-        if (wert2 == 0) {
-          throw new IllegalArgumentException("Divisor ist 0");
-        } else {
-          return wert1 / wert2;
-        }
-      case MULTIPLIKATION :
-        return wert1 * wert2;
+//  Map<Operation, BinaryOperator>aufgabe = new HashMap<Operation, BinaryOperator>();
+//  aufgabe.put(ADDITION, BinaryOperator<String> binaryOpt = );
+	
+	private DoubleDoubleZuDouble addition = (zahl1, zahl2) -> {return zahl1 + zahl2;};
+	private DoubleDoubleZuDouble subtraktion = (zahl1, zahl2) -> {return zahl1 - zahl2;};
+	private DoubleDoubleZuDouble multiplikation = (zahl1, zahl2) -> {return zahl1 * zahl2;};
+	private DoubleDoubleZuDouble division = (zahl1, zahl2) -> {return zahl1 / zahl2;};
+	
+	Map<Operation, BinaryOperator<DoubleDoubleZuDouble>> hm; 
+	
+	public void hashMaptest(){
+		new HashMap<>();
+	    hm.put(Operation.ADDITION, (BinaryOperator<DoubleDoubleZuDouble>) addition);
+	    hm.put(Operation.SUBTRAKTION, (BinaryOperator<DoubleDoubleZuDouble>) subtraktion);
+	    hm.put(Operation.MULTIPLIKATION, (BinaryOperator<DoubleDoubleZuDouble>) multiplikation);
+	    hm.put(Operation.DIVISION, (BinaryOperator<DoubleDoubleZuDouble>) division);    
     }
+    
+	public double berechne(Operation operator, double zahl1, double zahl2){
+		
+		return 1.0;
+	}
+    
 
-    return 0;
-  }
+	
+
+	
+	 
+	
+
+
 
 }
