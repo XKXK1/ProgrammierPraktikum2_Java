@@ -43,13 +43,26 @@ public class TestLambda {
   }
 
   @Test
-  public void testDoubDouble() {
+  public void testSAMMulti() {
     DoubleDoubleZuDouble samMulti = (zahl1, zahl2) -> {
-      return zahl1 * zahl2;};
+      return zahl1 * zahl2;
+    };
 
-      double berechnet = samMulti.werteAus(5, 3);
-      
-      assertEquals("Falsch", 15.0, berechnet , 0.1);
+    double berechnet = samMulti.werteAus(5, 3);
 
-    }
+    assertEquals("Falsch", 15.0, berechnet, 0.1);
+
+  }
+
+  @Test
+  public void testSAM() {
+    DoubleDoubleZuDouble samMulti = (zahl1, zahl2) -> {
+      return zahl1 * zahl2;
+    };
+
+    double berechnet = samMulti.werteAus(5, 3);
+
+    assertEquals("Falsch", 15.0, berechnet, 0.1);
+
+  }
 }
