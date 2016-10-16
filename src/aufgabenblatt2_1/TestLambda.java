@@ -1,4 +1,4 @@
-package augabenblatt2_1;
+package aufgabenblatt2_1;
 
 import static org.junit.Assert.*;
 
