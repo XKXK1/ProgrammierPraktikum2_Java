@@ -36,14 +36,9 @@ public class StreamFilter<T extends Comparable<T>> {
     String[] eingabe;
 
     eingabe = new String[10];
-
-    // initialize first element
     eingabe[0] = "Hallo ";
-    // initialize second element
     eingabe[1] = "DIESISTEIN";
-    // and so forth
     eingabe[2] = " BauAnA";
-
     eingabe[4] = "Lpﬂda";
     eingabe[5] = "SkLdJs";
     eingabe[6] = "H‰LlO";
