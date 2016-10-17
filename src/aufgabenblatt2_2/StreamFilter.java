@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import javafx.beans.binding.When.StringConditionBuilder;
 
 public class StreamFilter<T extends Comparable<T>> {
-
   private StringBeschneider schnippler = (String str) -> {if(str.length()>8){return str.substring(0, 8);}return str;};
 
   public List<T> verarbteitung(String[]eingabe){
