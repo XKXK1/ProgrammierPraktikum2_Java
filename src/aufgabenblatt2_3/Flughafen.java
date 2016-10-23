@@ -9,7 +9,6 @@ public class Flughafen extends Thread {
   private final int maxFlugzeuge;
   int flugzeugNummer = 1000;
   private int zeit;
-  public boolean landebahnFrei = true;
   String[] fluggesellschaft = {"Lufthansa", "Air Berlin", "Air France",
       "EuroWings", "Turkish Airlines"};
 
@@ -30,8 +29,8 @@ public class Flughafen extends Thread {
         if (anzahlFlugzeuge <= maxFlugzeuge) {
           flugzeuge.add(erzeugeFlugzeug(this, zeit));
         }
-        Thread.sleep(500);
-        zeit += 500;
+        Thread.sleep(1000);
+        zeit ++;        
       } catch (InterruptedException e) {
         System.err.println("Thread wurde durch Interrupt angesprochen");
       }
@@ -46,11 +45,21 @@ public class Flughafen extends Thread {
     System.err.println("Thead beendet");
   }
 
+  public synchronized void landeanflug(Flugzeug flugzeug) {
+    flugzeug.status = Status.IM_LANDEANFLUG;
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    flugzeug.istGelandet();
+  }
+  
   private Flugzeug erzeugeFlugzeug(Flughafen flughafen, int startzeit) {
     String flugzeugName = fluggesellschaft[(int)(Math.random()*fluggesellschaft.length)] + " " + (int) (Math.random()*9000);
     flugzeugNummer++;
     anzahlFlugzeuge++;
-    int flugdauer = (int) ((Math.random() + 1) * 5000);
+    int flugdauer = (int) ((Math.random() + 1) * 9);
 
     Flugzeug flugzeug = new Flugzeug(flugzeugName, flugdauer, flughafen,
         startzeit);
@@ -74,7 +83,7 @@ public class Flughafen extends Thread {
   }
 
   public static void main(String[] args) {
-    Flughafen flughafenHamburg = new Flughafen(5);
+    Flughafen flughafenHamburg = new Flughafen(10);
     flughafenHamburg.start();
   }
 

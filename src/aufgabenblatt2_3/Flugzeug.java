@@ -19,21 +19,19 @@ public class Flugzeug extends Thread {
   @Override
   public void run() {
     while (!isInterrupted()) {
-      while(!ankunft()){
-          try {
-            Thread.sleep(250);
-          } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
-      }if (flughafen.landebahnFrei){
-        landeanflug();
+      while (!ankunft()) {
+        try {
+          Thread.sleep(250);
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
       }
-      istGelandet();
-      }
+      flughafen.landeanflug(this);
     }
+  }
 
-  private boolean ankunft() {
+  public boolean ankunft() {
     if (flughafen.getZeit() - this.startzeit >= this.flugdauer) {
       return true;
     }
@@ -44,7 +42,6 @@ public class Flugzeug extends Thread {
     if (this.status == Status.IM_LANDEANFLUG) {
 
       this.status = Status.GELANDET;
-      flughafen.landebahnFrei = true;
       flughafen.anzahlFlugzeuge--;
       interrupt();
     }
@@ -55,18 +52,6 @@ public class Flugzeug extends Thread {
       return true;
     }
     return false;
-  }
-
-  public synchronized void landeanflug() {
-    if (flughafen.landebahnFrei) {
-      status = Status.IM_LANDEANFLUG;
-      flughafen.landebahnFrei = false;
-      try {
-        Thread.sleep(1500);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
   }
 
   @Override
