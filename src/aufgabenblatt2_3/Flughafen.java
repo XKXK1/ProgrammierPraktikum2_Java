@@ -4,56 +4,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Flughafen extends Thread {
-	Flugzeug flugzeug;
-	public int anzahlFlugzeuge;
-	private final int MAX_FLUGZEUGE = 3;
-	int flugzeugNummer = 1000;
-	private int zeit;
-	public boolean landebahnFrei = true;
+  Flugzeug flugzeug;
+  public int anzahlFlugzeuge;
+  private final int MAX_FLUGZEUGE = 3;
+  int flugzeugNummer = 1000;
+  private int zeit;
+  public boolean landebahnFrei = true;
 
-	List<Flugzeug> flugzeuge = new ArrayList<Flugzeug>();
+  List<Flugzeug> flugzeuge = new ArrayList<Flugzeug>();
 
-	public Flughafen(int anzahlFlugzeuge) {
-		this.anzahlFlugzeuge = anzahlFlugzeuge;
-	}
+  public Flughafen(int anzahlFlugzeuge) {
+    this.anzahlFlugzeuge = anzahlFlugzeuge;
+  }
 
-	public void landen(Flugzeug flugzeug) {
-	}
+  public void landen(Flugzeug flugzeug) {
+  }
 
-	@Override
-	public void run() {
+  @Override
+  public void run() {
 
-		while (!isInterrupted()) {
-			try {
-				if (anzahlFlugzeuge <= MAX_FLUGZEUGE) {
-					flugzeuge.add(erzeugeFlugzeug(this, zeit));
-				}
-				Thread.sleep(500);
-				zeit += 500;
-			} catch (InterruptedException e) {
-				System.err.println("Thread wurde durch Interrupt angesprochen");
-			}
-			System.out.format("\nMomentane Zeit: %d", zeit);
-		}
-		System.err.println("Thead beendet");
-	}
+    while (!isInterrupted()) {
+      try {
+        if (anzahlFlugzeuge <= MAX_FLUGZEUGE) {
+          flugzeuge.add(erzeugeFlugzeug(this, zeit));
+        }
+        Thread.sleep(500);
+        zeit += 500;
+      } catch (InterruptedException e) {
+        System.err.println("Thread wurde durch Interrupt angesprochen");
+      }
+      System.out.format(this.toString());
+    }
+    System.err.println("Thead beendet");
+  }
 
-	private Flugzeug erzeugeFlugzeug(Flughafen flughafen, int startzeit) {
-		flugzeugNummer++;
-		anzahlFlugzeuge++;
-		int flugdauer = (int) (Math.random() * 10);
-		String flugzeugName = String.valueOf(flugzeugNummer);
+  private Flugzeug erzeugeFlugzeug(Flughafen flughafen, int startzeit) {
+    flugzeugNummer++;
+    anzahlFlugzeuge++;
+    int flugdauer = (int) ((Math.random() + 1) * 500);
+    String flugzeugName = String.valueOf(flugzeugNummer);
 
-		Flugzeug flugzeug = new Flugzeug(flugzeugName, flugdauer, flughafen, startzeit);
-		return flugzeug;
-	}
+    Flugzeug flugzeug = new Flugzeug(flugzeugName, flugdauer, flughafen,
+        startzeit);
+    return flugzeug;
+  }
 
-	public static void main(String[] args) {
-		Flughafen flughafenHamburg = new Flughafen(1);
-		flughafenHamburg.start();
-	}
+  @Override
+  public String toString() {
+    String ausgabe = "";
+    if (anzahlFlugzeuge > 0) {
+      for (int i = 0; i <= anzahlFlugzeuge; i++) {
+        ausgabe += flugzeuge.get(i).toString();
+      }
+    }
+    return ausgabe;
+  }
 
-	public int getZeit() {
-		return zeit;
-	}
+  public static void main(String[] args) {
+    Flughafen flughafenHamburg = new Flughafen(1);
+    flughafenHamburg.start();
+  }
+
+  public int getZeit() {
+    return zeit;
+  }
 }
