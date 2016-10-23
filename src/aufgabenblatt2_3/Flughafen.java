@@ -6,7 +6,7 @@ import java.util.List;
 public class Flughafen extends Thread {
   Flugzeug flugzeug;
   public int anzahlFlugzeuge = 0;
-  private final int MAX_FLUGZEUGE = 10;
+  private final int maxFlugzeuge;
   int flugzeugNummer = 1000;
   private int zeit;
   public boolean landebahnFrei = true;
@@ -15,8 +15,8 @@ public class Flughafen extends Thread {
 
   List<Flugzeug> flugzeuge = new ArrayList<Flugzeug>();
 
-  public Flughafen(int anzahlFlugzeuge) {
-    this.anzahlFlugzeuge = anzahlFlugzeuge;
+  public Flughafen(int maxFlugzeuge) {
+    this.maxFlugzeuge = maxFlugzeuge;
   }
 
   public void landen(Flugzeug flugzeug) {
@@ -27,7 +27,7 @@ public class Flughafen extends Thread {
 
     while (!isInterrupted()) {
       try {
-        if (anzahlFlugzeuge <= MAX_FLUGZEUGE) {
+        if (anzahlFlugzeuge <= maxFlugzeuge) {
           flugzeuge.add(erzeugeFlugzeug(this, zeit));
         }
         Thread.sleep(500);
@@ -55,7 +55,7 @@ public class Flughafen extends Thread {
     Flugzeug flugzeug = new Flugzeug(flugzeugName, flugdauer, flughafen,
         startzeit);
     flugzeug.start();
-    System.out.println("->Neues Flugzeug wurde erzeugt: " + flugzeug);
+    System.out.println("->Neues Flugzeug wurde erzeugt: " + flugzeug + "\n");
     return flugzeug;
   }
 
@@ -74,7 +74,7 @@ public class Flughafen extends Thread {
   }
 
   public static void main(String[] args) {
-    Flughafen flughafenHamburg = new Flughafen(1);
+    Flughafen flughafenHamburg = new Flughafen(5);
     flughafenHamburg.start();
   }
 
