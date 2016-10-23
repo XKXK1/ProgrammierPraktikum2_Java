@@ -5,8 +5,8 @@ public class Flugzeug extends Thread {
 	private String id;
 	private int flugdauer;
 	private int startzeit;
+	private int zeitLandeanflug;
 	private Status status;
-	private int zeit;
 
 	public Flugzeug(String id, int flugdauer, Flughafen flughafen, int startzeit) {
 		this.id = id;
@@ -17,28 +17,38 @@ public class Flugzeug extends Thread {
 
 	@Override
 	public void run() {
+		while (!isInterrupted()) {
+			if (flughafen.getZeit() - this.startzeit >= this.flugdauer) {
+				if (flughafen.landebahnFrei) {
+					this.status = status.IM_LANDEANFLUG;
+					this.zeitLandeanflug = flughafen.getZeit();
+					flughafen.landebahnFrei = false;
 
-		// Flug zeit seit start<flugdauer
-		// Ueberpruefung = flugzeug gelandet?
-		// warten 1500ms
+				}
+				if (this.status == status.IM_LANDEANFLUG) {
+					if (flughafen.getZeit() - this.zeitLandeanflug >= 1500) {
+						this.status = status.GELANDET;
+						flughafen.landebahnFrei = true;
+						flughafen.anzahlFlugzeuge--;
+					}
+
+				}
+
+			}
+
+		}
 
 	}
 
-	@Override
-	public String toString() {
-		return "Flugzeug [flughafen=" + flughafen + ", id=" + id + ", flugdauer=" + flugdauer + ", startzeit="
-				+ startzeit + ", status=" + status + ", zeit=" + zeit + "]";
+	public void istGelandet() {
+		if (isGelandet()) {
+			status = status.GELANDET;
+		}
 	}
 
-	public void setZeit(int zeit) {
-		this.zeit += zeit;
-	}
+	public boolean isGelandet() {
 
-	public int getZeit() {
-		return zeit;
-	}
-
-	public boolean istGelandet() {
+		istGelandet();
 		return true;
 	}
 
