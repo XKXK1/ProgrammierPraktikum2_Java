@@ -3,15 +3,11 @@ package aufgabenblatt2_3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flughafen extends Thread {
-	Flugzeug flugzeug;
-	public int anzahlFlugzeuge = 0;
+public class Flughafen extends Thread {	
 	private final int maxFlugzeuge;
-	int flugzeugNummer = 1000;
 	private int zeit;
-	String[] fluggesellschaft = { "Lufthansa", "Air Berlin", "Air France", "EuroWings", "Turkish Airlines" };
-
-	List<Flugzeug> flugzeuge = new ArrayList<Flugzeug>();
+	private String[] fluggesellschaft = { "Lufthansa", "Air Berlin", "Air France", "EuroWings", "Turkish Airlines" };
+	private List<Flugzeug> flugzeuge = new ArrayList<Flugzeug>();
 
 	/**
 	 * Konstruktor für einen Flughafen. Als Argument kann die maximale Anzahl an
@@ -40,7 +36,7 @@ public class Flughafen extends Thread {
 				// Solange die Anzahl der Flugzeuge < maximale Anzahl der
 				// FLugzeuge wird ein neues Flugzeugobjek der Flugzeug-Liste
 				// hinzugefügt
-				if (anzahlFlugzeuge <= maxFlugzeuge) {
+				if (flugzeuge.size() <= maxFlugzeuge) {
 					flugzeuge.add(erzeugeFlugzeug(this, zeit));
 				}
 				// Der Thread schlaeft fuer 1000ms und die globale Zeit des
@@ -73,7 +69,7 @@ public class Flughafen extends Thread {
 	 */
 
 	public synchronized void landeanflug(Flugzeug flugzeug) {
-		flugzeug.status = Status.IM_LANDEANFLUG;
+		flugzeug.setStatus(Status.IM_LANDEANFLUG);
 		try {
 			// Der Thread schlaeft 3000ms. Diese Zeit repraesentiert die
 			// Landezeit
@@ -105,7 +101,6 @@ public class Flughafen extends Thread {
 		// flugzeugNummer++;
 		// die Anzahl der Fluege wird hochgezaehlt damit das Programm in der
 		// run() testen kann ob schon genug Objekte erstell wurden
-		anzahlFlugzeuge++;
 		int flugdauer = (int) ((Math.random() + 1) * 9);
 
 		// Der Konstruktor der Klasse Flugzeug wird aufgerufen um die Argumente
