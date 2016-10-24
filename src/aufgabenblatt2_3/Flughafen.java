@@ -15,7 +15,7 @@ public class Flughafen extends Thread {
 
 	/**
 	 * Konstruktor für einen Flughafen. Als Argument kann die maximale Anzahl an
-	 * Flugzeug-Objekten uebergeben werden.
+	 * Flugzeug-Objekten uebergeben werden.--
 	 * 
 	 * @param maxFlugzeuge
 	 */
