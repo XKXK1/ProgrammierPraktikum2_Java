@@ -5,7 +5,7 @@ public class Flugzeug extends Thread {
 	private String id;
 	private int flugdauer;
 	private int startzeit;
-	public Status status;
+	private Status status;
 
 	/**
 	 * Der Konstruktor fuer ein Flugzeug-Objekt erwartet folgende argumente:
@@ -77,7 +77,6 @@ public class Flugzeug extends Thread {
 		if (this.status == Status.IM_LANDEANFLUG) {
 
 			this.status = Status.GELANDET;
-			flughafen.anzahlFlugzeuge--;
 			// Beenden des Thtreads
 			interrupt();
 		}
@@ -104,5 +103,8 @@ public class Flugzeug extends Thread {
 		return "\nFlugzeug " + id + " (" + status + ", Zeit bis Ziel: "
 				+ (flugdauer - (flughafen.getZeit() - this.startzeit)) + ")";
 	}
-
+	
+	public void setStatus(Status status){
+		this.status = status;
+	}
 }
