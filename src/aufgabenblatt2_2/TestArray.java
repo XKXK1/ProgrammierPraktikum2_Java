@@ -14,12 +14,14 @@ public class TestArray {
     StreamFilter<String> test = new StreamFilter<>();
     String[] eingabe;
 
+    //Das String Array des Aufgabenblatts wird erstellt
     eingabe = new String[10];
     eingabe[0] = "Eingabe ";
     eingabe[1] = "Äußeres ";
     eingabe[2] = null;
     eingabe[3] = "Strassen-Feger";
     eingabe[4] = " ein Haus";
+    //Der verarbeitungs-Stream der Klasse Streamfilter wird aufgerufen und das Array wird uebergeben.
     List<String> ausgabeListe = test.verarbteitung(eingabe);
 
     List<String> erwartungsListe = new ArrayList<>();
