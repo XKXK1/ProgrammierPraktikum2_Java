@@ -41,8 +41,8 @@ public class Flugzeug extends Thread {
 				try {
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.err.println("Thread wurde durch Interrupt angesprochen");
+					interrupt();
 				}
 			}
 			// Die Bedingung fuer eine Ankunft sind erfuellt und der Landeanflug

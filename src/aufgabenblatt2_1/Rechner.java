@@ -3,6 +3,8 @@ package aufgabenblatt2_1;
 import java.util.HashMap;
 import java.util.function.BinaryOperator;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages;
+
 /**
  * Diese Klasse repraesentiert die Funktionalitaet eines Rechners mit den 4
  * Rechenoperationen Addition, Subtraktion, Multiplikation,Division.
@@ -45,14 +47,20 @@ public class Rechner {
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Division wird zurueckgegeben
 		hm.put(Operation.DIVISION, (zahl1, zahl2) -> {
-			if (zahl2 == 0) {
+//			try{ zahl1/zahl2;
+//			} catch (NullPointerException e){
+//				ErrorMessages("Teilen durch 0 nicht moeglich!");
+//		}
+//			return zahl1/zahl2;
+//		});
+				if (zahl2 == 0) {
 				System.out.println("Teilen durch 0 nicht möglich");
 			}
 			return zahl1 / zahl2;
 		});
 	}
 
-	/**
+/**
 	 * Die Methode berechne wird fuer die Anwendung der Rechenoperationen
 	 * verwendet. Der gewuenschte Rechenoperator und 2 Zahlen des Typs Double
 	 * werden erwartet. Das berechnete Ergebnis wird zurueckgegeben.

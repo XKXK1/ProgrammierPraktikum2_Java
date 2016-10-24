@@ -49,6 +49,7 @@ public class Flughafen extends Thread {
 				zeit++;
 			} catch (InterruptedException e) {
 				System.err.println("Thread wurde durch Interrupt angesprochen");
+				interrupt();
 			}
 			System.out.format(this.toString());
 			// Falls ein Flugzeugzeug-Objekt der Liste gelandet ist wird dieses
