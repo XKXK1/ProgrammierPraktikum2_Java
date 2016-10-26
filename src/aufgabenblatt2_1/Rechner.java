@@ -65,9 +65,4 @@ public class Rechner {
 	public double berechne(Operation operator, double zahl1, double zahl2) {
 		return rechnerMap.get(operator).apply(zahl1, zahl2);
 	}
-
-	public static void main(String[] args) {
-		Rechner rechner1 = new Rechner();
-		rechner1.berechne(Operation.DIVISION, 12, 0);
-	}
 }
