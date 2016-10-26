@@ -15,7 +15,7 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages;
 public class Rechner {
 	// Eine Hashmap, welche Objekte der 2 Typen(Operation und
 	// BinaryOperator<Double>) verwaltet.
-	HashMap<Operation, BinaryOperator<Double>> hm;
+	HashMap<Operation, BinaryOperator<Double>> rechnerMap;
 
 	/**
 	 * Die Methode Rechner() erstellt eine Map, welche die 4 Rechenarten
@@ -23,30 +23,30 @@ public class Rechner {
 	 */
 	public Rechner() {
 		// Die Hashmap fuer unsere Rechenoperationen wird erstellt
-		hm = new HashMap<Operation, BinaryOperator<Double>>();
+		rechnerMap = new HashMap<Operation, BinaryOperator<Double>>();
 		// Die Operation Addition wird als Lambda Ausdruck in die Map
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Addition wird zurueckgegeben
 
-		hm.put(Operation.ADDITION, (zahl1, zahl2) -> {
+		rechnerMap.put(Operation.ADDITION, (zahl1, zahl2) -> {
 			return zahl1 + zahl2;
 		});
 		// Die Operation Subtraktion wird als Lambda Ausdruck in die Map
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Subtraktion wird zurueckgegeben
-		hm.put(Operation.SUBTRAKTION, (zahl1, zahl2) -> {
+		rechnerMap.put(Operation.SUBTRAKTION, (zahl1, zahl2) -> {
 			return zahl1 - zahl2;
 		});
 		// Die Operation Multiplikation wird als Lambda Ausdruck in die Map
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Multiplikation wird zurueckgegeben
-		hm.put(Operation.MULTIPLIKATION, (zahl1, zahl2) -> {
+		rechnerMap.put(Operation.MULTIPLIKATION, (zahl1, zahl2) -> {
 			return zahl1 * zahl2;
 		});
 		// Die Operation Division wird als Lambda Ausdruck in die Map
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Division wird zurueckgegeben
-		hm.put(Operation.DIVISION, (zahl1, zahl2) -> {
+		rechnerMap.put(Operation.DIVISION, (zahl1, zahl2) -> {
 //			try{ zahl1/zahl2;
 //			} catch (NullPointerException e){
 //				ErrorMessages("Teilen durch 0 nicht moeglich!");
@@ -71,6 +71,6 @@ public class Rechner {
 	 * @return
 	 */
 	public double berechne(Operation operator, double zahl1, double zahl2) {
-		return hm.get(operator).apply(zahl1, zahl2);
+		return rechnerMap.get(operator).apply(zahl1, zahl2);
 	}
 }
