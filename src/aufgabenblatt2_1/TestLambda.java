@@ -62,14 +62,14 @@ public class TestLambda {
 	}
 
 	@Test
-	public void testSAM() {
-		DoubleDoubleZuDouble samMulti = (zahl1, zahl2) -> {
-			return zahl1 * zahl2;
+	public void testSAMDivision() {
+		DoubleDoubleZuDouble samDivision = (zahl1, zahl2) -> {
+			return zahl1 / zahl2;
 		};
 
-		double berechnet = samMulti.werteAus(5, 3);
+		double berechnet = samDivision.werteAus(12.1, 6.0);
 
-		assertEquals("Falsch", 15.0, berechnet, 0.1);
+		assertEquals("Falsch", 2.016, berechnet, 0.1);
 
 	}
 }
