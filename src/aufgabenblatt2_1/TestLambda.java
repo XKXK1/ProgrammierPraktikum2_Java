@@ -32,7 +32,7 @@ public class TestLambda {
     assertEquals("Fehler: Es wurde 2 erwartet!", erwartetesErgebnis, ergebnis,
         0.1);
   }
-
+  
   @Test
   public void testMultiplikation() {
     Rechner rechner = new Rechner();

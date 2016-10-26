@@ -45,20 +45,23 @@ public class Rechner {
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Division wird zurueckgegeben
 		rechnerMap.put(Operation.DIVISION, (zahl1, zahl2) -> {
-//			try{ zahl1/zahl2;
-//			} catch (NullPointerException e){
-//				ErrorMessages("Teilen durch 0 nicht moeglich!");
-//		}
-//			return zahl1/zahl2;
-//		});
-				if (zahl2 == 0) {
-				System.out.println("Teilen durch 0 nicht möglich");
+			try {
+				return zahl1 / zahl2;
+			} catch (Exception e) {
+				System.err.println("ArithmeticException: " + e.getMessage());
 			}
+
 			return zahl1 / zahl2;
+
 		});
+		// if (zahl2 == 0) {
+		// System.out.println("Teilen durch 0 nicht möglich");
+		// }
+		// return zahl1 / zahl2;
+		// });
 	}
 
-/**
+	/**
 	 * Die Methode berechne wird fuer die Anwendung der Rechenoperationen
 	 * verwendet. Der gewuenschte Rechenoperator und 2 Zahlen des Typs Double
 	 * werden erwartet. Das berechnete Ergebnis wird zurueckgegeben.
@@ -70,5 +73,10 @@ public class Rechner {
 	 */
 	public double berechne(Operation operator, double zahl1, double zahl2) {
 		return rechnerMap.get(operator).apply(zahl1, zahl2);
+	}
+
+	public static void main(String[] args) {
+		Rechner rechner1 = new Rechner();
+		rechner1.berechne(Operation.DIVISION, 12, 0);
 	}
 }
