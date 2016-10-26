@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Stream;
-
-import javafx.beans.binding.When.StringConditionBuilder;
 
 /**
  * Die Klasse Streamfilter des generischen Typs T mit dem Typebound Comparable
@@ -21,7 +17,7 @@ public class StreamFilter<T extends Comparable<T>> {
 	 * Eine Methode des Functional Interface "Stringbeschneider" Der Lambda
 	 * Ausdruck erwartet einen String und beschneidet ihn auf Maximal 8 zeichen.
 	 */
-	private StringBeschneider schnippler = (String str) -> {
+	private StringBeschneider beschneider = (String str) -> {
 		if (str.length() > 8) {
 			return str.substring(0, 8);
 		}
@@ -42,14 +38,14 @@ public class StreamFilter<T extends Comparable<T>> {
 	public List<T> verarbteitung(String[] eingabe) {
 		// Das zu bearbeitende Array wird in eine Liste geschrieben um die
 		// funktionalitaet des Streams nutzen zu koennen
-		List<String> verwurster = (List<String>) Arrays.asList(eingabe);
+		List<String> eingabeListe = (List<String>) Arrays.asList(eingabe);
 		// eine Leere Ausgabeliste wird erstellt
-		List<String> ausgabe = new ArrayList<>();
+		List<String> ausgabeListe = new ArrayList<>();
 
-		verwurster.stream().filter(Objects::nonNull).map(String::trim).map(String::toUpperCase)
+		eingabeListe.stream().filter(Objects::nonNull).map(String::trim).map(String::toUpperCase)
 				.map(aeErsetzer -> aeErsetzer.replace("Ä", "AE")).map(ueErsetzer -> ueErsetzer.replace("Ü", "UE"))
 				.map(oeErsetzer -> oeErsetzer.replace("Ö", "OE")).map(szErsetzer -> szErsetzer.replace("ß", "SS"))
-				.map(String -> schnippler.richtigeLaenge(String)).forEach(ausgabe::add);
-		return (List<T>) ausgabe;
+				.map(String -> beschneider.richtigeLaenge(String)).forEach(ausgabeListe::add);
+		return (List<T>) ausgabeListe;
 	}
 }
