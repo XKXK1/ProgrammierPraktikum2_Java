@@ -45,14 +45,9 @@ public class Rechner {
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Division wird zurueckgegeben
 		rechnerMap.put(Operation.DIVISION, (zahl1, zahl2) -> {
-			try {
-				return zahl1 / zahl2;
-			} catch (Exception e) {
-				System.err.println("ArithmeticException: " + e.getMessage());
-			}
-
-			return zahl1 / zahl2;
-
+		  if (zahl2 == 0) {
+		    throw new IllegalArgumentException("Argument 'divisor' is 0");
+		}return zahl1/zahl2;
 		});
 		// if (zahl2 == 0) {
 		// System.out.println("Teilen durch 0 nicht möglich");
