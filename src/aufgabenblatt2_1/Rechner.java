@@ -14,6 +14,7 @@ public class Rechner {
 	// Eine Hashmap, welche Objekte der 2 Typen(Operation und
 	// BinaryOperator<Double>) verwaltet.
 	HashMap<Operation, BinaryOperator<Double>> rechnerMap;
+	
 
 	/**
 	 * Die Methode Rechner() erstellt eine Map, welche die 4 Rechenarten
