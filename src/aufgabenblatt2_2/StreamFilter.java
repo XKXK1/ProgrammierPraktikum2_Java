@@ -10,6 +10,8 @@ import java.util.Objects;
  * um nur Typen zu akzeptieren, welche mit comparable<T> verglichen werden
  * koennen. Dies gewaehrleistet die Funktionalitaet der Methoden der Klasse.
  *
+ * @author Derya Uyargil, Daniel von Drathen
+ *
  * @param <T>
  */
 public class StreamFilter<T extends Comparable<T>> {
