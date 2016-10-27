@@ -17,7 +17,8 @@ import java.util.List;
  */
 
 public class Flughafen extends Thread {
-	private final int maxFlugzeuge;
+	private final int STEP_LENGTH = 500; //Zeiteinheit in ms
+	private int maxFlugzeuge;
 	private int zeit;
 	private String[] fluggesellschaft = { "Lufthansa", "Air Berlin", "Air France", "EuroWings", "Turkish Airlines" };
 	private List<Flugzeug> flugzeuge = new ArrayList<Flugzeug>();
@@ -54,7 +55,7 @@ public class Flughafen extends Thread {
 				}
 				// Der Thread schlaeft fuer 1000ms und die globale Zeit des
 				// Flughafens wird um 1 erhoet
-				Thread.sleep(1000);
+				Thread.sleep(STEP_LENGTH);
 				zeit++;
 			} catch (InterruptedException e) {
 				System.err.println("Thread wurde durch Interrupt angesprochen");
@@ -86,7 +87,7 @@ public class Flughafen extends Thread {
 		try {
 			// Der Thread schlaeft 3000ms. Diese Zeit repraesentiert die
 			// Landezeit
-			Thread.sleep(3000);
+			Thread.sleep(STEP_LENGTH*3);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -137,11 +138,6 @@ public class Flughafen extends Thread {
 		}
 
 		return ausgabe + "\n \n";
-	}
-
-	public static void main(String[] args) {
-		Flughafen flughafenHamburg = new Flughafen(3);
-		flughafenHamburg.start();
 	}
 
 	public int getZeit() {

@@ -64,6 +64,7 @@ public class Rechner {
 	 * @return
 	 */
 	public double berechne(Operation operator, double zahl1, double zahl2) {
+		
 		return rechnerMap.get(operator).apply(zahl1, zahl2);
 	}
 }
