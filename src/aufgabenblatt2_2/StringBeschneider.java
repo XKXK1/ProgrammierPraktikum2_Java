@@ -5,7 +5,7 @@ package aufgabenblatt2_2;
  * Es es wird als beschneider eines Strings dienen und erwartet einen string als
  * Argument.
  * 
- *  * @author Derya Uyargil, Daniel von Drathen
+ * @author Derya Uyargil, Daniel von Drathen
  */
 @FunctionalInterface
 public interface StringBeschneider {

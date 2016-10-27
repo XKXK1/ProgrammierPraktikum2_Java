@@ -1,5 +1,13 @@
 package aufgabenblatt2_3;
 
+/**
+ * Die Klasse Flugzeug repraesentiert ein Flugzeugobjekt. Dieses Flugzeugobjekt
+ * wird in einem Objekt des Flughafens erzeugt. 
+ * 
+ * @author Derya Uyargil, Daniel von Drathen
+ *
+ */
+
 public class Flugzeug extends Thread {
 	private Flughafen flughafen;
 	private String id;
@@ -103,8 +111,8 @@ public class Flugzeug extends Thread {
 		return "\nFlugzeug " + id + " (" + status + ", Zeit bis Ziel: "
 				+ (flugdauer - (flughafen.getZeit() - this.startzeit)) + ")";
 	}
-	
-	public void setStatus(Status status){
+
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 }

@@ -3,7 +3,20 @@ package aufgabenblatt2_3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flughafen extends Thread {	
+/**
+ * Die Klasse Flughafen repraesentiert eine Simulation eines Flughafens. Ein
+ * Flughafen hat eine Liste von Flugzeugen die randomisiert erstellt werden. Es
+ * ist immer nur einem Flugzeug gleichzeitig gestattet einen Landeanflug zu
+ * durchlaufen, alle anderen Flugzeuge muessen in der Zeit warten. Es werden so
+ * lange Flugzeugobjekte erstellt und gestartet, bis die vordefinierte
+ * Maximalanzahl in der Liste erreicht ist. Wenn ein Flugzeug gelandet ist, wird
+ * es aus der Liste entfernt und ein neues Flugzeug wird erstellt.
+ * 
+ * @author Derya Uyargil, Daniel von Drathen
+ *
+ */
+
+public class Flughafen extends Thread {
 	private final int maxFlugzeuge;
 	private int zeit;
 	private String[] fluggesellschaft = { "Lufthansa", "Air Berlin", "Air France", "EuroWings", "Turkish Airlines" };

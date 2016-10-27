@@ -7,7 +7,7 @@ import java.util.function.BinaryOperator;
  * Diese Klasse repraesentiert die Funktionalitaet eines Rechners mit den 4
  * Rechenoperationen Addition, Subtraktion, Multiplikation,Division.
  * 
- * @author pewpe
+ * @author Derya Uyargil, Daniel von Drathen
  *
  */
 public class Rechner {
