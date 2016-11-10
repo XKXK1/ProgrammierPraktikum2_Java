@@ -1,14 +1,12 @@
 package aufgabenblatt3;
 
-public class Rangierbahnhof extends Thread {
+public class Rangierbahnhof{
   private int anzGleise = 3;
   private Zug zugliste = new Zug();
-
   @Override
   public void run() {
-
+    
   }
-
   private synchronized void Einfahren(int gleisNr) {
 
   }
