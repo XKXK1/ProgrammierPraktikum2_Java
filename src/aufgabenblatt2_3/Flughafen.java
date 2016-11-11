@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class Flughafen extends Thread {
-	private final int STEP_LENGTH = 500; //Zeiteinheit in ms
+	private final int STEP_LENGTH = 500; // Zeiteinheit in ms
 	private int maxFlugzeuge;
 	private int zeit;
 	private String[] fluggesellschaft = { "Lufthansa", "Air Berlin", "Air France", "EuroWings", "Turkish Airlines" };
@@ -50,7 +50,7 @@ public class Flughafen extends Thread {
 				// Solange die Anzahl der Flugzeuge < maximale Anzahl der
 				// FLugzeuge wird ein neues Flugzeugobjek der Flugzeug-Liste
 				// hinzugefügt
-				if (flugzeuge.size() <= maxFlugzeuge) {
+				if (flugzeuge.size() < maxFlugzeuge) {
 					flugzeuge.add(erzeugeFlugzeug(this, zeit));
 				}
 				// Der Thread schlaeft fuer 1000ms und die globale Zeit des
@@ -87,7 +87,7 @@ public class Flughafen extends Thread {
 		try {
 			// Der Thread schlaeft 3000ms. Diese Zeit repraesentiert die
 			// Landezeit
-			Thread.sleep(STEP_LENGTH*3);
+			Thread.sleep(STEP_LENGTH * 3);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

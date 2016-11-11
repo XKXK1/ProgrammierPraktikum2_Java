@@ -13,8 +13,7 @@ import java.util.function.BinaryOperator;
 public class Rechner {
 	// Eine Hashmap, welche Objekte der 2 Typen(Operation und
 	// BinaryOperator<Double>) verwaltet.
-	HashMap<Operation, BinaryOperator<Double>> rechnerMap;
-	
+	private HashMap<Operation, DoubleDoubleZuDouble> rechnerMap;
 
 	/**
 	 * Die Methode Rechner() erstellt eine Map, welche die 4 Rechenarten
@@ -22,7 +21,7 @@ public class Rechner {
 	 */
 	public Rechner() {
 		// Die Hashmap fuer unsere Rechenoperationen wird erstellt
-		rechnerMap = new HashMap<Operation, BinaryOperator<Double>>();
+		rechnerMap = new HashMap<Operation, DoubleDoubleZuDouble>();
 		// Die Operation Addition wird als Lambda Ausdruck in die Map
 		// eingefuegt. Es werden 2 Zahlen des Typs BinaryOperator<Double>
 		// erwartet. Das Ergebnis der Addition wird zurueckgegeben
@@ -64,7 +63,7 @@ public class Rechner {
 	 * @return
 	 */
 	public double berechne(Operation operator, double zahl1, double zahl2) {
-		
-		return rechnerMap.get(operator).apply(zahl1, zahl2);
+
+		return rechnerMap.get(operator).werteAus(zahl1, zahl2);
 	}
 }

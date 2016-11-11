@@ -27,14 +27,14 @@ public class TestLambda {
 		Rechner rechner = new Rechner();
 		double ergebnis = rechner.berechne(Operation.DIVISION, 12.1, 6.0);
 		double erwartetesErgebnis = 2.016;
-		assertEquals("Fehler: Es wurde 2 erwartet!", erwartetesErgebnis, ergebnis, 0.1);
+		assertEquals("Fehler: Es wurde 2 erwartet!", erwartetesErgebnis, ergebnis, 0.001);
 	}
 
 	@Test
 	public void testDivisionDurchNull() {
 		Rechner rechner = new Rechner();
 		try {
-			rechner.berechne(Operation.DIVISION, 12.1, 0);
+			rechner.berechne(Operation.DIVISION, 12.1, 0.1);
 			assert false;
 		} catch (IllegalArgumentException e) {
 			assert true;

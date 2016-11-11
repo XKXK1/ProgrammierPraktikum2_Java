@@ -14,7 +14,7 @@ import java.util.Objects;
  *
  * @param <T>
  */
-public class StreamFilter<T extends Comparable<T>> {
+public class StreamFilter<T> {
 	/**
 	 * Eine Methode des Functional Interface "Stringbeschneider" Der Lambda
 	 * Ausdruck erwartet einen String und beschneidet ihn auf Maximal 8 zeichen.
@@ -37,7 +37,7 @@ public class StreamFilter<T extends Comparable<T>> {
 	 * @param eingabe
 	 * @return
 	 */
-	public List<T> verarbteitung(String[] eingabe) {
+	public List<String> verarbteitung(String[] eingabe) {
 		// Das zu bearbeitende Array wird in eine Liste geschrieben um die
 		// funktionalitaet des Streams nutzen zu koennen
 		List<String> eingabeListe = (List<String>) Arrays.asList(eingabe);
@@ -47,7 +47,7 @@ public class StreamFilter<T extends Comparable<T>> {
 		eingabeListe.stream().filter(Objects::nonNull).map(String::trim).map(String::toUpperCase)
 				.map(aeErsetzer -> aeErsetzer.replace("Ä", "AE")).map(ueErsetzer -> ueErsetzer.replace("Ü", "UE"))
 				.map(oeErsetzer -> oeErsetzer.replace("Ö", "OE")).map(szErsetzer -> szErsetzer.replace("ß", "SS"))
-				.map(String -> beschneider.richtigeLaenge(String)).forEach(ausgabeListe::add);
-		return (List<T>) ausgabeListe;
+				.map(text -> beschneider.richtigeLaenge(text)).forEach(ausgabeListe::add);
+		return ausgabeListe;
 	}
 }
