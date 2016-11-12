@@ -27,10 +27,9 @@ public class Rangierbahnhof extends Thread {
 				}
 			}
 			try {
-				Thread.sleep(450);
+				Thread.sleep(1500);
 				gleise.add(new Zug());
 				System.out.println("Zug faehrt ein");
-
 			} catch (InterruptedException e) {
 			}
 			monitor.notifyAll();
@@ -40,13 +39,12 @@ public class Rangierbahnhof extends Thread {
 
 	public void ausfahren() {
 		synchronized (monitor) {
-
 			if (gleise.size() == 0) {
 				System.out.println("***Es ist kein Zug zum ausfahren vorhanden.");
 
 			} else {
 				try {
-					Thread.sleep(450);
+					Thread.sleep(1500);
 					for (int i = 0; i < gleise.size(); i++) {
 						if (gleise.get(i) != null) {
 							gleise.remove(i);
@@ -63,7 +61,7 @@ public class Rangierbahnhof extends Thread {
 		String lokfuehrerName = lokfuehrerBuero[(int) (Math.random() * lokfuehrerBuero.length)];
 		Lokfuehrer lokfuehrer = new Lokfuehrer(bahnhof, lokfuehrerName);
 		lokfuehrer.start();
-		System.out.println("->Neues Lokfuehrer beginnt seine Arbeit.: " + lokfuehrerName + "\n");
+		System.out.println("->Neues Lokfuehrer beginnt seine Arbeit: " + lokfuehrerName + "\n");
 		return lokfuehrer;
 	}
 
@@ -84,5 +82,4 @@ public class Rangierbahnhof extends Thread {
 		}
 		System.err.println("Thead beendet");
 	}
-
 }

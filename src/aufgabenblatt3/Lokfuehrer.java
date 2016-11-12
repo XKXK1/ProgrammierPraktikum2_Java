@@ -2,11 +2,11 @@ package aufgabenblatt3;
 
 public class Lokfuehrer extends Thread {
 	private Rangierbahnhof bahnhof;
-	private String name;
+	private String lokfuehrerName;
 
 	public Lokfuehrer(Rangierbahnhof bahnhof, String name) {
 		this.bahnhof = bahnhof;
-		this.name = name;
+		this.lokfuehrerName = name;
 	}
 
 	@Override
