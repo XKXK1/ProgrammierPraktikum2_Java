@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="63.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="63.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="31.0" layoutY="85.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="63.0" layoutY="159.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="63.0" layoutY="229.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="31.0" layoutY="194.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="63.0" layoutY="274.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="63.0" layoutY="344.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="6.0" layoutX="31.0" layoutY="309.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <Rectangle fx:id="gleis0" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="47.0" layoutX="81.0" layoutY="65.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+      <Rectangle fx:id="gleis1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="47.0" layoutX="81.0" layoutY="174.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+      <Rectangle fx:id="gleis2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="47.0" layoutX="81.0" layoutY="289.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+   </children>
+</Pane>
