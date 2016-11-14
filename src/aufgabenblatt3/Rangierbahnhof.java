@@ -9,18 +9,14 @@ public class Rangierbahnhof extends Observable implements Runnable {
 	private final Object monitor;
 	private int zeit;
 	int zahl = 0;
-	private ArrayList<Observer> observers;
 
 	public Rangierbahnhof(Object monitor) {
-		observers = new ArrayList<Observer>();
 		this.monitor = monitor;
 	}
 
 	public List<Lokfuehrer> warteschlange = new ArrayList<Lokfuehrer>();
+	
 	private Zug[] gleisArr = new Zug[3];
-	// private List<Zug> gleise = new ArrayList<Zug>();
-	// private String[] lokfuehrerBuero = { "Hans", "Willi", "Werner", "Udo",
-	// "Ralf" };
 
 	public void einfahren(String lokfuehrername) {
 		synchronized (monitor) {
@@ -29,7 +25,8 @@ public class Rangierbahnhof extends Observable implements Runnable {
 				for (int i = 0; i < gleisArr.length; i++) {
 					if (gleisArr[i] == null) {
 						gleisArr[i] = new Zug();
-						notifyObserver();
+						setChanged();
+						notifyObservers(gleisArr);
 						System.out.println(lokfuehrername + " faehrt den Zug ein");
 						Thread.sleep(2000);
 						i = gleisArr.length;
@@ -51,7 +48,8 @@ public class Rangierbahnhof extends Observable implements Runnable {
 				for (int i = 0; i < gleisArr.length; i++) {
 					if (gleisArr[i] != null) {
 						gleisArr[i] = null;
-						notifyObserver();
+						setChanged();
+						notifyObservers(gleisArr);
 						System.out.println(lokfuehrername + " faehrt den Zug aus");
 						Thread.sleep(2000);
 						i = gleisArr.length;
@@ -67,8 +65,6 @@ public class Rangierbahnhof extends Observable implements Runnable {
 	}
 
 	private Lokfuehrer erzeugeLokfuehrer(Rangierbahnhof bahnhof) {
-		// String lokfuehrerName = lokfuehrerBuero[(int) (Math.random() *
-		// lokfuehrerBuero.length)];
 		String lokfuehrerName = "Lokfuehrer " + zahl;
 		Lokfuehrer lokfuehrer = new Lokfuehrer(bahnhof, lokfuehrerName);
 		lokfuehrer.start();
@@ -84,11 +80,7 @@ public class Rangierbahnhof extends Observable implements Runnable {
 				System.out.println("\nZEIT: " + zeit);
 				zeit++;
 				erzeugeLokfuehrer(this);
-				// for (int i = 0; i < warteschlange.size(); i++) {
-				// System.out.println(
-				// "in warteschlange platz: " + i + " == " +
-				// warteschlange.get(i).getLokfuehrerName());
-				// }
+
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				System.err.println("Thread wurde durch Interrupt angesprochen");
@@ -96,21 +88,6 @@ public class Rangierbahnhof extends Observable implements Runnable {
 			}
 		}
 		System.err.println("Thead beendet");
-	}
-
-	public void addObserver(Observer newObserver) {
-		observers.add(newObserver);
-	}
-
-	public void deleteObserver(Observer deleteObverver) {
-		observers.remove(deleteObverver);
-
-	}
-
-	public void notifyObserver() {
-		for (Observer observer : observers) {
-			observer.update(gleisArr);
-		}
 	}
 
 }
