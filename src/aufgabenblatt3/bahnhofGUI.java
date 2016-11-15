@@ -2,100 +2,156 @@ package aufgabenblatt3;
 
 import java.util.Observable;
 import java.util.Observer;
-
 import javafx.application.Application;
-import javafx.fxml.FXML;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import javafx.stage.WindowEvent;
+/**
+ * Diese Klasse dient zum Anzeigen des Bahnhofs als grafische Oberflaeche. Die implementiert das Observer-Interface, da sie auf die Updates ihres Observierten Klasse(Rangierbahnhof)
+ * angewiesen ist um sich entsprechend zu 
+ */
 public class bahnhofGUI extends Application implements Observer {
-	Rangierbahnhof bahnhof;
-	private Zug[] gleisArrObs = new Zug[3];
 
-	Rectangle r = new Rectangle();
-	Rectangle r1 = new Rectangle();
-	Rectangle r2 = new Rectangle();
-	
-	@FXML
-	private Rectangle gleis0;
-	
-	@FXML
-	private Rectangle gleis1;
-	
-	@FXML
-	private Rectangle gleis2;
+	private Rangierbahnhof bahnhof;
+	private Pane root;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		Object monitor = new Object();
-		bahnhof = new Rangierbahnhof(monitor);
-		bahnhof.addObserver(this);
-		Thread RangierbahnhofThread = new Thread(bahnhof);
-		RangierbahnhofThread.start();
-		
-	      Pane root =
-	          (Pane)FXMLLoader.load(getClass().getResource("main.fxml"));		
 
+		// Laden der im Scene-Builder erstellten grafischen Oberflaeche
+		root = FXMLLoader.load(getClass().getResource("main.fxml"));
+
+		// Erstellen der Szene mit der grafischen Oberflaeche Weite:400px
+		// Hoehe:400px
 		Scene scene = new Scene(root, 400, 400);
-		root.getChildren().add(gleis0);
-		root.getChildren().add(gleis1);
-		root.getChildren().add(gleis2);
-		
-
+		primaryStage.setTitle("Simulation Rangierbahnhof");
 		primaryStage.setScene(scene);
+		// Anzeigen der Stage
 		primaryStage.show();
 
-	}
+		// Erstellen eines Bahnhofs
+		bahnhof = new Rangierbahnhof();
+		// Hinzufuegen des Observerobjektes(dieses Objekt)
+		bahnhof.addObserver(this);
 
-	public void updateColorGreen(int index) {
-		if (index == 0){
-			r.setFill(Color.GREEN);
-		} else if (index == 1){
-			r1.setFill(Color.GREEN);
-		} else if (index == 2){
-			r2.setFill(Color.GREEN);
-		}
-	}
-	
-	public void updateColorRed(int index) {
-		if (index == 0){
-			r.setFill(Color.RED);
-		} else if (index == 1){
-			r1.setFill(Color.RED);
-		} else if (index == 2){
-			r2.setFill(Color.RED);
-		}
-	}
+		// Erstellen und Starten der Simulation
+		Thread RangierbahnhofThread = new Thread(bahnhof);
+		RangierbahnhofThread.start();
 
+		// Beenden des erstellten SimulationsThreads durch Schliessen des
+		// GUI-Fensters
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent event) {
+				RangierbahnhofThread.interrupt();
+			}
+		});
+	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
+	/**
+	 * Die update-Methode wird vom Observer-Interface geerbt. Sie wird immer
+	 * dann aufgerufen wenn im Observierten Objekt die Methode
+	 * "notifyObservers();" aufgerufen wird.
+	 */
 	@Override
 	public void update(Observable arg0, Object arg) {
-		Zug[] gleise = (Zug[]) arg;
-		for (int i = 0; i < gleise.length; i++) {
-			gleisArrObs[i] = gleise[i];
-		}
-		printGleise();
-
-	}
-
-	private void printGleise() {
-		for (int i = 0; i < gleisArrObs.length; i++) {
-			if (gleisArrObs[i] != null) {
-				System.out.println("Gleis nummer " + i + " ist besetzt");
-				updateColorRed(i);				
+		// Die Gleise des Bahnhofs werden Ueberprueft
+		for (int i = 0; i < bahnhof.getGleisArr().length; i++) {
+			if (bahnhof.getGleisArr()[i] != null) {
+				// Bei besetztem Gleis
+				printGleisBesetzt(i);
 			} else {
-				System.out.println("Gleis nummer " + i + " ist frei");
-				updateColorGreen(i);
+				// Bei freiem Gleis
+				printGleisFrei(i);
 			}
 		}
 	}
+
+	/**
+	 * Das erwartet Argument des gleisIndexes wird in der Switch-Abfrage
+	 * verarbeitet und dann auf den Zustand:Frei gesetzt d.h.: Beschriftung des
+	 * Gleises und Abbildung des Zuges aendern.
+	 * 
+	 * @param gleisIndex
+	 */
+	public void printGleisFrei(int gleisIndex) {
+
+		// Erstellen von Rectangle und Textobjekt um die Children bearbeiten zu
+		// koennen
+		Rectangle rect;
+		Text text;
+		
+		// Die zu veraendernden Elemente muessen auf das jeweilige Element
+		// gecastet werden um eine Veraenderung zu bewirken
+		switch (gleisIndex) {
+		case 0:
+			text = (Text) (root.getChildren().get(12));
+			text.setText("Gleis 0: FREI");
+			rect = (Rectangle) (root.getChildren().get(9));
+			rect.setFill(Color.TRANSPARENT);
+			break;
+		case 1:
+			text = (Text) (root.getChildren().get(13));
+			text.setText("Gleis 0: FREI");
+			rect = (Rectangle) (root.getChildren().get(10));
+			rect.setFill(Color.TRANSPARENT);
+			break;
+		case 2:
+			text = (Text) (root.getChildren().get(14));
+			text.setText("Gleis 0: FREI");
+			rect = (Rectangle) (root.getChildren().get(11));
+			rect.setFill(Color.TRANSPARENT);
+			break;
+		}
+	}
+
+	/**
+	 * Das erwartet Argument des gleisIndexes wird in der Switch-Abfrage
+	 * verarbeitet und dann auf den Zustand:Besetzt gesetzt d.h.: Beschriftung des
+	 * Gleises und Abbildung des Zuges aendern(Rot faerben).
+	 * 
+	 * @param gleisIndex
+	 */
+	public void printGleisBesetzt(int gleisIndex) {
+
+		// Erstellen von Rectangle und Textobjekt um die Children bearbeiten zu
+		// koennen
+		Rectangle rect;
+		Text text;
+		
+		// Die zu veraendernden Elemente muessen auf das jeweilige Element
+		// gecastet werden um eine Veraenderung zu bewirken
+		switch (gleisIndex) {
+		case 0:
+			text = (Text) (root.getChildren().get(12));
+			text.setText("Gleis 0: BESETZT");
+			rect = (Rectangle) (root.getChildren().get(9));
+			rect.setFill(Color.RED);
+			break;
+		case 1:
+			text = (Text) (root.getChildren().get(13));
+			text.setText("Gleis 0: BESETZT");
+			rect = (Rectangle) (root.getChildren().get(10));
+			rect.setFill(Color.RED);
+			break;
+		case 2:
+			text = (Text) (root.getChildren().get(14));
+			text.setText("Gleis 0: BESETZT");
+			rect = (Rectangle) (root.getChildren().get(11));
+			rect.setFill(Color.RED);
+			break;
+		}
+	}
+
 }
