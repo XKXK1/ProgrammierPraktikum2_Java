@@ -7,7 +7,7 @@ import java.util.Observable;
  * kann nur genau ein Zug stehen.
  * 
  */
-public class Rangierbahnhof extends Observable implements Runnable {
+public class Rangierbahnhof extends Observable{
 
 	private int anzahlGleise = 3;
 	private int zeit;
@@ -60,22 +60,22 @@ public class Rangierbahnhof extends Observable implements Runnable {
 		return lokfuehrer;
 	}
 
-	@Override
-	public void run() {
-		while (!Thread.currentThread().isInterrupted()) {
-			try {
-				System.out.println("\nZEIT: " + zeit);
-				zeit++;
-				erzeugeLokfuehrer(this);
-
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				System.err.println("Thread wurde durch Interrupt angesprochen");
-				Thread.currentThread().interrupt();
-			}
-		}
-		System.err.println("Thead beendet");
-	}
+//	@Override
+//	public void run() {
+//		while (!Thread.currentThread().isInterrupted()) {
+//			try {
+//				System.out.println("\nZEIT: " + zeit);
+//				zeit++;
+//				erzeugeLokfuehrer(this);
+//
+//				Thread.sleep(500);
+//			} catch (InterruptedException e) {
+//				System.err.println("Thread wurde durch Interrupt angesprochen");
+//				Thread.currentThread().interrupt();
+//			}
+//		}
+//		System.err.println("Thead beendet");
+//	}
 
 	public Zug[] getGleisArr() {
 		return gleisArr;

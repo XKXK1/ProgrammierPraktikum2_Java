@@ -17,8 +17,8 @@ import javafx.stage.WindowEvent;
  * angewiesen ist um sich entsprechend zu 
  */
 public class bahnhofGUI extends Application implements Observer {
-
-	private Rangierbahnhof bahnhof;
+	
+	private simulationRangierbahnhof simulation;
 	private Pane root;
 
 	@Override
@@ -36,13 +36,15 @@ public class bahnhofGUI extends Application implements Observer {
 		primaryStage.show();
 
 		// Erstellen eines Bahnhofs
-		bahnhof = new Rangierbahnhof();
+//		bahnhof = new Rangierbahnhof();
 		// Hinzufuegen des Observerobjektes(dieses Objekt)
-		bahnhof.addObserver(this);
+//		bahnhof.addObserver(this);
 
 		// Erstellen und Starten der Simulation
-		Thread RangierbahnhofThread = new Thread(bahnhof);
-		RangierbahnhofThread.start();
+		simulation = new simulationRangierbahnhof(this);
+		Thread simulationThread = new Thread (simulation);
+		simulationThread.start();
+
 
 		// Beenden des erstellten SimulationsThreads durch Schliessen des
 		// GUI-Fensters
@@ -50,7 +52,7 @@ public class bahnhofGUI extends Application implements Observer {
 
 			@Override
 			public void handle(WindowEvent event) {
-				RangierbahnhofThread.interrupt();
+				simulationThread.interrupt();
 			}
 		});
 	}
@@ -67,8 +69,8 @@ public class bahnhofGUI extends Application implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg) {
 		// Die Gleise des Bahnhofs werden Ueberprueft
-		for (int i = 0; i < bahnhof.getGleisArr().length; i++) {
-			if (bahnhof.getGleisArr()[i] != null) {
+		for (int i = 0; i < simulation.getGleisArr().length; i++) {
+			if (simulation.getGleisArr()[i] != null) {
 				// Bei besetztem Gleis
 				printGleisBesetzt(i);
 			} else {
