@@ -4,21 +4,31 @@ import java.util.Observable;
 
 /**
  * Die Klasse Rangierbahnhof hat eine feste Anzahl von Gleisen. Auf jedem Gleis
- * kann nur genau ein Zug stehen.
+ * kann nur genau ein Zug stehen. Zuege koennen einfahren und Ausfahren, jedoch
+ * nicht beides gleichzeitig. Es gibt nur ein Gleis welches zum Ein/Ausfahren
+ * benutzt werden kann.
  * 
  */
-public class Rangierbahnhof extends Observable{
+public class Rangierbahnhof extends Observable {
 
 	private int anzahlGleise = 3;
-	private int zeit;
 	private int lokfuehrerzahl = 0;
-
 	private Zug[] gleisArr = new Zug[anzahlGleise];
 
-	public int getAnzahlGleise() {
-		return anzahlGleise;
-	}
-
+	/**
+	 * Die einfahren-Methode setzt den Thread in den "Wartemodus" wenn das zu
+	 * befahrende Gleis schon besetzt sein sollte. Falls das Gleis frei ist wird
+	 * dort ein neues Zug-Objekt erstellt. Diese Veraenderung wird dem Observer
+	 * mitgeteilt. Bei erfolgreichem ausfuehren dieser Methode werden alle
+	 * "wartenden" Threads aufgeweckt.Sowohl die ausfahren- als auch
+	 * einfahren-Methode sind synchronized. Somit teilen sie sich einen
+	 * statischen Monitor der fuer die gesamte Klasse gilt. Dadurch wird
+	 * sichergestellt, dass diese beiden Methoden nur nacheinander ausfuehrbar
+	 * sind.
+	 * 
+	 * @param lokfuehrername
+	 * @param gleis
+	 */
 	public synchronized void einfahren(String lokfuehrername, int gleis) {
 		try {
 			if (gleisArr[gleis] != null) {
@@ -35,6 +45,20 @@ public class Rangierbahnhof extends Observable{
 		}
 	}
 
+	/**
+	 * Die ausfahren-Methode setzt den Thread in den "Wartemodus" wenn das zu
+	 * befahrende Gleis leer sein sollte. Falls das Gleis besetzt ist wird das
+	 * dortige Zug-Objekt entfernt. Diese Veraenderung wird dem Observer
+	 * mitgeteilt. Bei erfolgreichem ausfuehren dieser Methode werden alle
+	 * "wartenden" Threads aufgeweckt. Sowohl die ausfahren- als auch
+	 * einfahren-Methode sind synchronized. Somit teilen sie sich einen
+	 * statischen Monitor der fuer die gesamte Klasse gilt. Dadurch wird
+	 * sichergestellt, dass diese beiden Methoden nur nacheinander ausfuehrbar
+	 * sind.
+	 * 
+	 * @param lokfuehrername
+	 * @param gleis
+	 */
 	public synchronized void ausfahren(String lokfuehrername, int gleis) {
 		try {
 			if (gleisArr[gleis] == null) {
@@ -51,6 +75,12 @@ public class Rangierbahnhof extends Observable{
 		}
 	}
 
+	/**
+	 * Zum erstellen eines Lokfuehrer-Objektes. Dieser bekommt einen Namen der von 0 bis n hochgezaehlt wird.
+	 * Die Methode erwartet ein Rangierbahnhof-Objekt, d
+	 * @param bahnhof
+	 * @return
+	 */
 	public Lokfuehrer erzeugeLokfuehrer(Rangierbahnhof bahnhof) {
 		String lokfuehrerName = "Lokfuehrer " + lokfuehrerzahl;
 		Lokfuehrer lokfuehrer = new Lokfuehrer(bahnhof, lokfuehrerName);
@@ -60,25 +90,11 @@ public class Rangierbahnhof extends Observable{
 		return lokfuehrer;
 	}
 
-//	@Override
-//	public void run() {
-//		while (!Thread.currentThread().isInterrupted()) {
-//			try {
-//				System.out.println("\nZEIT: " + zeit);
-//				zeit++;
-//				erzeugeLokfuehrer(this);
-//
-//				Thread.sleep(500);
-//			} catch (InterruptedException e) {
-//				System.err.println("Thread wurde durch Interrupt angesprochen");
-//				Thread.currentThread().interrupt();
-//			}
-//		}
-//		System.err.println("Thead beendet");
-//	}
-
 	public Zug[] getGleisArr() {
 		return gleisArr;
 	}
 
+	public int getAnzahlGleise() {
+		return anzahlGleise;
+	}
 }

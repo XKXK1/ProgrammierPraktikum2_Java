@@ -35,11 +35,6 @@ public class bahnhofGUI extends Application implements Observer {
 		// Anzeigen der Stage
 		primaryStage.show();
 
-		// Erstellen eines Bahnhofs
-//		bahnhof = new Rangierbahnhof();
-		// Hinzufuegen des Observerobjektes(dieses Objekt)
-//		bahnhof.addObserver(this);
-
 		// Erstellen und Starten der Simulation
 		simulation = new simulationRangierbahnhof(this);
 		Thread simulationThread = new Thread (simulation);

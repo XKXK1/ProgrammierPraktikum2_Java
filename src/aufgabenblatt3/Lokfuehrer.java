@@ -4,7 +4,8 @@ package aufgabenblatt3;
  * Die Lokfuehrer-Klasse hat die Aufgabe mit jedem erstellten Objekt einen
  * Thread zu starten. Dieser Lokfuehrer-Thread hat eine 50:50 Chance nur einen
  * von zwei Aufgaben(einfahren(),ausfahren() auszufuehren. Mit der Erstellung
- * des Objekts wird die Aufgabe festgelegt.
+ * des Objekts wird die Aufgabe festgelegt. Es wird beim Erstellen festgelegt,
+ * auf welchem Gleis er dies ausfuehren wird.
  */
 public class Lokfuehrer extends Thread {
 
