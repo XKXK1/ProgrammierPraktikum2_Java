@@ -48,8 +48,7 @@ public class bahnhofGUI extends Application implements Observer {
 			@Override
 			public void handle(WindowEvent event) {
 				simulationThread.interrupt();
-			}
-		});
+			}});
 	}
 
 	public static void main(String[] args) {

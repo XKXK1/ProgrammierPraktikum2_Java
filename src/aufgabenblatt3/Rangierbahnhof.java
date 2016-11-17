@@ -85,7 +85,7 @@ public class Rangierbahnhof extends Observable {
 		String lokfuehrerName = "Lokfuehrer " + lokfuehrerzahl;
 		Lokfuehrer lokfuehrer = new Lokfuehrer(bahnhof, lokfuehrerName);
 		lokfuehrer.start();
-		System.out.println("->Neues Lokfuehrer beginnt seine Arbeit: " + lokfuehrerName + "\n");
+		System.out.println("->Neuer Lokfuehrer beginnt seine Arbeit: " + lokfuehrerName + "\n");
 		lokfuehrerzahl++;
 		return lokfuehrer;
 	}

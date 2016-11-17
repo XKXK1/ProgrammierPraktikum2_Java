@@ -11,7 +11,7 @@ public class Lokfuehrer extends Thread {
 
 	private Rangierbahnhof bahnhof;
 	private String lokfuehrerName;
-	private double job;
+	private int job;
 	private int gleis;
 
 	public Lokfuehrer(Rangierbahnhof bahnhof, String name) {
@@ -28,7 +28,7 @@ public class Lokfuehrer extends Thread {
 	@Override
 	public void run() {
 		while (!isInterrupted()) {
-			if (job < 1) {
+			if (job == 1) {
 				bahnhof.einfahren(lokfuehrerName, gleis);
 			} else {
 				bahnhof.ausfahren(lokfuehrerName, gleis);
