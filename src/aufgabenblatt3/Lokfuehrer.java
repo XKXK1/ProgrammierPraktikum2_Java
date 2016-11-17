@@ -1,6 +1,8 @@
 package aufgabenblatt3;
 
 /**
+ * @author Derya Uyargil, Daniel von Drathen
+ * 
  * Die Lokfuehrer-Klasse hat die Aufgabe mit jedem erstellten Objekt einen
  * Thread zu starten. Dieser Lokfuehrer-Thread hat eine 50:50 Chance nur einen
  * von zwei Aufgaben(einfahren(),ausfahren() auszufuehren. Mit der Erstellung
@@ -11,13 +13,17 @@ public class Lokfuehrer extends Thread {
 
 	private Rangierbahnhof bahnhof;
 	private String lokfuehrerName;
-	private int job;
 	private int gleis;
+	private Job job;
 
 	public Lokfuehrer(Rangierbahnhof bahnhof, String name) {
 		this.bahnhof = bahnhof;
 		this.lokfuehrerName = name;
-		job = (int) (Math.random() * 2);
+		if ((Math.random() * 2) > 1) {
+			job = Job.EINFAHREN;
+		} else {
+			job = Job.AUSFAHREN;
+		}
 		gleis = (int) (Math.random() * bahnhof.getAnzahlGleise());
 	}
 
@@ -28,7 +34,7 @@ public class Lokfuehrer extends Thread {
 	@Override
 	public void run() {
 		while (!isInterrupted()) {
-			if (job == 1) {
+			if (job == Job.EINFAHREN) {
 				bahnhof.einfahren(lokfuehrerName, gleis);
 			} else {
 				bahnhof.ausfahren(lokfuehrerName, gleis);

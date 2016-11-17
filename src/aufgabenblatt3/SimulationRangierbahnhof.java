@@ -1,21 +1,24 @@
 package aufgabenblatt3;
 
 /**
+ * @author Derya Uyargil, Daniel von Drathen
+ * 
  * Diese Klasse repraesentiert die Simulation eines Rangierbahnhofs. Es wird ein
  * Rangierbahnhof erstellt. Alle 500ms wird ein Lokfuehrer erzeugt, welcher nur
  * eine Aufgabe hat(Ein- oder Ausfahren auf ein bestimmtes Gleis.
  *
  */
-public class simulationRangierbahnhof implements Runnable {
-	
+public class SimulationRangierbahnhof implements Runnable {
+
 	private Rangierbahnhof bahnhof;
 
 	/**
 	 * Der Konstruktor erwartet als Argument ein bahnhofGUI-Objekt. Dies wird
 	 * benötigt um dem Bahnhof(Observable) das Observer-Objekt(In diesem Fall
 	 * unser GUI) zu übergeben.
+	 * @param gui
 	 */
-	public simulationRangierbahnhof(bahnhofGUI gui) {
+	public SimulationRangierbahnhof(BahnhofGUI gui) {
 		this.bahnhof = new Rangierbahnhof();
 		this.bahnhof.addObserver(gui);
 	}

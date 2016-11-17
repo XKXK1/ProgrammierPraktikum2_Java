@@ -2,7 +2,13 @@ package aufgabenblatt3;
 
 import java.util.Observable;
 
+// if -> while
+// runLater
+// Code-Conventionen!
+
 /**
+ * @author Derya Uyargil, Daniel von Drathen
+ * 
  * Die Klasse Rangierbahnhof hat eine feste Anzahl von Gleisen. Auf jedem Gleis
  * kann nur genau ein Zug stehen. Zuege koennen einfahren und Ausfahren, jedoch
  * nicht beides gleichzeitig. Es gibt nur ein Gleis welches zum Ein/Ausfahren
@@ -31,16 +37,16 @@ public class Rangierbahnhof extends Observable {
 	 */
 	public synchronized void einfahren(String lokfuehrername, int gleis) {
 		try {
-			if (gleisArr[gleis] != null) {
+			while (gleisArr[gleis] != null) {
 				this.wait();
-			} else {
-				gleisArr[gleis] = new Zug();
-				setChanged();
-				notifyObservers(gleisArr);
-				System.out.println(lokfuehrername + " faehrt den Zug ein--> GLEIS: " + gleis);
-				Thread.sleep(0);
-				this.notifyAll();
+				Thread.sleep(100);
 			}
+			gleisArr[gleis] = new Zug();
+			setChanged();
+			notifyObservers(gleisArr);
+			System.out.println(lokfuehrername + " faehrt den Zug ein--> GLEIS: " + gleis);
+			Thread.sleep(0);
+			this.notifyAll();
 		} catch (InterruptedException e) {
 		}
 	}
@@ -61,23 +67,25 @@ public class Rangierbahnhof extends Observable {
 	 */
 	public synchronized void ausfahren(String lokfuehrername, int gleis) {
 		try {
-			if (gleisArr[gleis] == null) {
+			while (gleisArr[gleis] == null) {
 				this.wait();
-			} else {
-				gleisArr[gleis] = null;
-				setChanged();
-				notifyObservers(gleisArr);
-				System.out.println(lokfuehrername + " faehrt den Zug aus--> GLEIS: " + gleis);
-				Thread.sleep(0);
-				this.notifyAll();
+				Thread.sleep(100);
 			}
+			gleisArr[gleis] = null;
+			setChanged();
+			notifyObservers(gleisArr);
+			System.out.println(lokfuehrername + " faehrt den Zug aus--> GLEIS: " + gleis);
+			Thread.sleep(0);
+			this.notifyAll();
 		} catch (InterruptedException e) {
 		}
 	}
 
 	/**
-	 * Zum erstellen eines Lokfuehrer-Objektes. Dieser bekommt einen Namen der von 0 bis n hochgezaehlt wird.
-	 * Die Methode erwartet ein Rangierbahnhof-Objekt, d
+	 * Zum erstellen eines Lokfuehrer-Objektes. Dieser bekommt einen Namen der
+	 * von 0 bis n hochgezaehlt wird. Die Methode erwartet ein
+	 * Rangierbahnhof-Objekt, d
+	 * 
 	 * @param bahnhof
 	 * @return
 	 */

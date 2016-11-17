@@ -3,6 +3,7 @@ package aufgabenblatt3;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,13 +15,15 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
+ * @author Derya Uyargil, Daniel von Drathen
+ * 
  * Diese Klasse dient zum Anzeigen des Bahnhofs als grafische Oberflaeche. Die
  * implementiert das Observer-Interface, da sie auf die Updates ihres
  * Observierten Klasse(Rangierbahnhof) angewiesen ist um sich entsprechend zu
  */
-public class bahnhofGUI extends Application implements Observer {
+public class BahnhofGUI extends Application implements Observer {
 
-	private simulationRangierbahnhof simulation;
+	private SimulationRangierbahnhof simulation;
 	private Pane root;
 
 	@Override
@@ -38,7 +41,7 @@ public class bahnhofGUI extends Application implements Observer {
 		primaryStage.show();
 
 		// Erstellen und Starten der Simulation
-		simulation = new simulationRangierbahnhof(this);
+		simulation = new SimulationRangierbahnhof(this);
 		Thread simulationThread = new Thread(simulation);
 		simulationThread.start();
 
@@ -61,6 +64,8 @@ public class bahnhofGUI extends Application implements Observer {
 	 * Die update-Methode wird vom Observer-Interface geerbt. Sie wird immer
 	 * dann aufgerufen wenn im Observierten Objekt die Methode
 	 * "notifyObservers();" aufgerufen wird.
+	 * @param arg0
+	 * @param arg
 	 */
 	@Override
 	public void update(Observable arg0, Object arg) {
@@ -84,7 +89,6 @@ public class bahnhofGUI extends Application implements Observer {
 	 * @param gleisIndex
 	 */
 	public void printGleisFrei(int gleisIndex) {
-
 		// Erstellen von Rectangle und Textobjekt um die Children bearbeiten zu
 		// koennen
 		Rectangle rect;
@@ -93,9 +97,12 @@ public class bahnhofGUI extends Application implements Observer {
 		// Die zu veraendernden Elemente muessen auf das jeweilige Element
 		// gecastet werden um eine Veraenderung zu bewirken
 		text = (Text) (root.getChildren().get(12 + gleisIndex));
-		text.setText("Gleis 0: FREI");
 		rect = (Rectangle) (root.getChildren().get(9 + gleisIndex));
-		rect.setFill(Color.TRANSPARENT);
+
+		Platform.runLater(() -> {
+			text.setText(gleisIndex + ": FREI");
+			rect.setFill(Color.TRANSPARENT);
+		});
 	}
 
 	/**
@@ -115,8 +122,11 @@ public class bahnhofGUI extends Application implements Observer {
 		// Die zu veraendernden Elemente muessen auf das jeweilige Element
 		// gecastet werden um eine Veraenderung zu bewirken
 		text = (Text) (root.getChildren().get(12 + gleisIndex));
-		text.setText("Gleis 0: BESETZT");
 		rect = (Rectangle) (root.getChildren().get(9 + gleisIndex));
-		rect.setFill(Color.RED);
+
+		Platform.runLater(() -> {
+			text.setText(gleisIndex + ": BESETZT");
+			rect.setFill(Color.RED);
+		});
 	}
 }
