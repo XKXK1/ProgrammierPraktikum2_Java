@@ -12,12 +12,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 /**
- * Diese Klasse dient zum Anzeigen des Bahnhofs als grafische Oberflaeche. Die implementiert das Observer-Interface, da sie auf die Updates ihres Observierten Klasse(Rangierbahnhof)
- * angewiesen ist um sich entsprechend zu 
+ * Diese Klasse dient zum Anzeigen des Bahnhofs als grafische Oberflaeche. Die
+ * implementiert das Observer-Interface, da sie auf die Updates ihres
+ * Observierten Klasse(Rangierbahnhof) angewiesen ist um sich entsprechend zu
  */
 public class bahnhofGUI extends Application implements Observer {
-	
+
 	private simulationRangierbahnhof simulation;
 	private Pane root;
 
@@ -37,9 +39,8 @@ public class bahnhofGUI extends Application implements Observer {
 
 		// Erstellen und Starten der Simulation
 		simulation = new simulationRangierbahnhof(this);
-		Thread simulationThread = new Thread (simulation);
+		Thread simulationThread = new Thread(simulation);
 		simulationThread.start();
-
 
 		// Beenden des erstellten SimulationsThreads durch Schliessen des
 		// GUI-Fensters
@@ -48,7 +49,8 @@ public class bahnhofGUI extends Application implements Observer {
 			@Override
 			public void handle(WindowEvent event) {
 				simulationThread.interrupt();
-			}});
+			}
+		});
 	}
 
 	public static void main(String[] args) {
@@ -75,9 +77,9 @@ public class bahnhofGUI extends Application implements Observer {
 	}
 
 	/**
-	 * Das erwartet Argument des gleisIndexes wird in der Switch-Abfrage
-	 * verarbeitet und dann auf den Zustand:Frei gesetzt d.h.: Beschriftung des
-	 * Gleises und Abbildung des Zuges aendern.
+	 * Das erwartet Argument des gleisIndexes wird verarbeitet und dann auf den
+	 * Zustand:Frei gesetzt d.h.: Beschriftung des Gleises und Abbildung des
+	 * Zuges aendern.
 	 * 
 	 * @param gleisIndex
 	 */
@@ -87,35 +89,19 @@ public class bahnhofGUI extends Application implements Observer {
 		// koennen
 		Rectangle rect;
 		Text text;
-		
+
 		// Die zu veraendernden Elemente muessen auf das jeweilige Element
 		// gecastet werden um eine Veraenderung zu bewirken
-		switch (gleisIndex) {
-		case 0:
-			text = (Text) (root.getChildren().get(12));
-			text.setText("Gleis 0: FREI");
-			rect = (Rectangle) (root.getChildren().get(9));
-			rect.setFill(Color.TRANSPARENT);
-			break;
-		case 1:
-			text = (Text) (root.getChildren().get(13));
-			text.setText("Gleis 0: FREI");
-			rect = (Rectangle) (root.getChildren().get(10));
-			rect.setFill(Color.TRANSPARENT);
-			break;
-		case 2:
-			text = (Text) (root.getChildren().get(14));
-			text.setText("Gleis 0: FREI");
-			rect = (Rectangle) (root.getChildren().get(11));
-			rect.setFill(Color.TRANSPARENT);
-			break;
-		}
+		text = (Text) (root.getChildren().get(12 + gleisIndex));
+		text.setText("Gleis 0: FREI");
+		rect = (Rectangle) (root.getChildren().get(9 + gleisIndex));
+		rect.setFill(Color.TRANSPARENT);
 	}
 
 	/**
 	 * Das erwartet Argument des gleisIndexes wird in der Switch-Abfrage
-	 * verarbeitet und dann auf den Zustand:Besetzt gesetzt d.h.: Beschriftung des
-	 * Gleises und Abbildung des Zuges aendern(Rot faerben).
+	 * verarbeitet und dann auf den Zustand:Besetzt gesetzt d.h.: Beschriftung
+	 * des Gleises und Abbildung des Zuges aendern(Rot faerben).
 	 * 
 	 * @param gleisIndex
 	 */
@@ -125,29 +111,12 @@ public class bahnhofGUI extends Application implements Observer {
 		// koennen
 		Rectangle rect;
 		Text text;
-		
+
 		// Die zu veraendernden Elemente muessen auf das jeweilige Element
 		// gecastet werden um eine Veraenderung zu bewirken
-		switch (gleisIndex) {
-		case 0:
-			text = (Text) (root.getChildren().get(12));
-			text.setText("Gleis 0: BESETZT");
-			rect = (Rectangle) (root.getChildren().get(9));
-			rect.setFill(Color.RED);
-			break;
-		case 1:
-			text = (Text) (root.getChildren().get(13));
-			text.setText("Gleis 0: BESETZT");
-			rect = (Rectangle) (root.getChildren().get(10));
-			rect.setFill(Color.RED);
-			break;
-		case 2:
-			text = (Text) (root.getChildren().get(14));
-			text.setText("Gleis 0: BESETZT");
-			rect = (Rectangle) (root.getChildren().get(11));
-			rect.setFill(Color.RED);
-			break;
-		}
+		text = (Text) (root.getChildren().get(12 + gleisIndex));
+		text.setText("Gleis 0: BESETZT");
+		rect = (Rectangle) (root.getChildren().get(9 + gleisIndex));
+		rect.setFill(Color.RED);
 	}
-
 }
