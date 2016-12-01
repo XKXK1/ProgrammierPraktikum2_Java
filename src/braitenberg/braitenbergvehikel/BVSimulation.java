@@ -2,6 +2,7 @@ package braitenberg.braitenbergvehikel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import braitenberg.braitenbergvehikel.BraitenbergVehikel.Richtung;
 
@@ -10,7 +11,8 @@ import braitenberg.braitenbergvehikel.BraitenbergVehikel.Richtung;
  * 
  * @author Philipp Jenke
  */
-public class BVSimulation {
+public class BVSimulation extends Observable implements Runnable  {
+	
 
   /**
    * Position des Signals.
@@ -41,7 +43,10 @@ public class BVSimulation {
 
       // Bewege vehikel
       vehikel.bewege();
+      setChanged();
+  	  notifyObservers();
     }
+  
   }
 
   /**
@@ -81,4 +86,19 @@ public class BVSimulation {
   public void setSignal(double x, double y) {
     signal = new Vektor2(x, y);
   }
+
+@Override
+public void run() {
+	while (!Thread.currentThread().isInterrupted()) {
+		try {
+			this.simulationsSchritt();
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			System.err.println("Thread wurde durch Interrupt angesprochen");
+			Thread.currentThread().interrupt();
+		}
+	}
+	System.err.println("Thead beendet");
+	
+}
 }

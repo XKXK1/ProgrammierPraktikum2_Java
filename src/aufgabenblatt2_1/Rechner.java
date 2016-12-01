@@ -1,7 +1,7 @@
 package aufgabenblatt2_1;
 
 import java.util.HashMap;
-import java.util.function.BinaryOperator;
+
 
 /**
  * Diese Klasse repraesentiert die Funktionalitaet eines Rechners mit den 4

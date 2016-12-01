@@ -73,7 +73,7 @@ public class Rangierbahnhof extends Observable {
 			}
 			gleisArr[gleis] = null;
 			setChanged();
-			notifyObservers(gleisArr);
+			notifyObservers();
 			System.out.println(lokfuehrername + " faehrt den Zug aus--> GLEIS: " + gleis);
 			Thread.sleep(0);
 			this.notifyAll();
