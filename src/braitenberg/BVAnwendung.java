@@ -6,12 +6,18 @@
 package braitenberg;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -70,12 +76,33 @@ public class BVAnwendung extends Application {
 		   }
 		});
 		
+		
 
 
 		// Vbox zum anordnen der Elemente
 		vbox.getChildren().add(auswahlbox);
 		vbox.setSpacing(10);
 		vbox.setPadding(new Insets(50, 50, 10, 20));
+		
+//  Dropdown hinzufuegen
+    SplitPane splitpaneMax = new SplitPane();
+    SplitPane splitpaneMoritz = new SplitPane();
+    vbox.getChildren().add(splitpaneMax);
+    vbox.getChildren().add(splitpaneMoritz);
+    Label labelMa = new Label("Max");
+    Label labelMo = new Label("Moritz");
+    ComboBox<String> comboBoxMax = new ComboBox<String>(
+        FXCollections.observableArrayList("Attraktion", "Abstossen"));
+    comboBoxMax.setValue("Attraktion");
+    ComboBox<String> comboBoxMoritz = new ComboBox<String>(
+        FXCollections.observableArrayList("Attraktion", "Abstossen"));
+    comboBoxMoritz.setValue("Abstossen");
+    splitpaneMax.getItems().add(labelMa);
+    splitpaneMax.getItems().add(comboBoxMax);
+    splitpaneMoritz.getItems().add(labelMo);
+    splitpaneMoritz.getItems().add(comboBoxMoritz);
+    splitpaneMax.setStyle("-fx-box-border: transparent;");
+    splitpaneMoritz.setStyle("-fx-box-border: transparent;");
 
 		primaryStage.setScene(new Scene(wurzel, 850, 600));
 		primaryStage.show();
