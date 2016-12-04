@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import braitenberg.BVAnwendung;
 import braitenberg.braitenbergvehikel.BraitenbergVehikel.Richtung;
 
 /**
@@ -12,6 +13,7 @@ import braitenberg.braitenbergvehikel.BraitenbergVehikel.Richtung;
  * @author Philipp Jenke
  */
 public class BVSimulation extends Observable implements Runnable  {
+  BVAnwendung anwendung;
 	
 
   /**

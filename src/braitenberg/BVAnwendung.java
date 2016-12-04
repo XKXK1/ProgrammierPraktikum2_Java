@@ -7,7 +7,6 @@ package braitenberg;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,10 +16,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import braitenberg.braitenbergvehikel.BVBewegungAbstossung;
 import braitenberg.braitenbergvehikel.BVBewegungAttraktion;
 import braitenberg.braitenbergvehikel.BVSimulation;
@@ -35,7 +35,9 @@ import braitenberg.view.BVCanvas;
  * @author Philipp Jenke
  */
 public class BVAnwendung extends Application {
-
+  String bewegungSusi = "Attraktion";
+  String bewegungMike = "Abstossen";
+  
 	@Override
 	public void start(Stage primaryStage) {
 		// Simulation zusammenstellen
@@ -75,9 +77,6 @@ public class BVAnwendung extends Application {
 			   simulationThread.interrupt();
 		   }
 		});
-		
-		
-
 
 		// Vbox zum anordnen der Elemente
 		vbox.getChildren().add(auswahlbox);
@@ -85,25 +84,52 @@ public class BVAnwendung extends Application {
 		vbox.setPadding(new Insets(50, 50, 10, 20));
 		
 //  Dropdown hinzufuegen
-    SplitPane splitpaneMax = new SplitPane();
-    SplitPane splitpaneMoritz = new SplitPane();
-    vbox.getChildren().add(splitpaneMax);
-    vbox.getChildren().add(splitpaneMoritz);
-    Label labelMa = new Label("Max");
-    Label labelMo = new Label("Moritz");
-    ComboBox<String> comboBoxMax = new ComboBox<String>(
-        FXCollections.observableArrayList("Attraktion", "Abstossen"));
-    comboBoxMax.setValue("Attraktion");
-    ComboBox<String> comboBoxMoritz = new ComboBox<String>(
-        FXCollections.observableArrayList("Attraktion", "Abstossen"));
-    comboBoxMoritz.setValue("Abstossen");
-    splitpaneMax.getItems().add(labelMa);
-    splitpaneMax.getItems().add(comboBoxMax);
-    splitpaneMoritz.getItems().add(labelMo);
-    splitpaneMoritz.getItems().add(comboBoxMoritz);
-    splitpaneMax.setStyle("-fx-box-border: transparent;");
-    splitpaneMoritz.setStyle("-fx-box-border: transparent;");
-
+    SplitPane splitpaneSusi = new SplitPane();
+    SplitPane splitpaneMike = new SplitPane();
+    vbox.getChildren().add(splitpaneSusi);
+    vbox.getChildren().add(splitpaneMike);
+    Label labelSusi = new Label("Susi");
+    Label labelMike = new Label("Mike");
+    ComboBox<String> comboBoxSusi = new ComboBox<String>(
+        FXCollections.observableArrayList("ATTRAKTION", "ABSTOSSUNG"));
+    comboBoxSusi.setValue("ATTRAKTION");
+    ComboBox<String> comboBoxMike = new ComboBox<String>(
+        FXCollections.observableArrayList("ATTRAKTION", "ABSTOSSUNG"));
+    comboBoxMike.setValue("ABSTOSSUNG");
+    splitpaneSusi.getItems().add(labelSusi);
+    splitpaneSusi.getItems().add(comboBoxSusi);
+    splitpaneMike.getItems().add(labelMike);
+    splitpaneMike.getItems().add(comboBoxMike);
+    splitpaneSusi.setStyle("-fx-box-border: transparent;");
+    splitpaneMike.setStyle("-fx-box-border: transparent;");
+    
+    comboBoxSusi.getSelectionModel().selectedItemProperty().addListener(
+    (v, oldValue, newValue) -> {if(newValue=="ATTRAKTION"){
+      sim.getVehikel(0).setBewegung(new BVBewegungAttraktion());
+      canvas.zeichneSimulation();
+    }else{
+      sim.getVehikel(0).setBewegung(new BVBewegungAbstossung());
+      canvas.zeichneSimulation();
+    }});
+    
+    comboBoxMike.getSelectionModel().selectedItemProperty().addListener(
+        (v, oldValue, newValue) -> {if(newValue=="ATTRAKTION"){
+          sim.getVehikel(1).setBewegung(new BVBewegungAttraktion());
+          canvas.zeichneSimulation();
+        }else{
+          sim.getVehikel(1).setBewegung(new BVBewegungAbstossung());
+          canvas.zeichneSimulation();
+        }});
+    
+    canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent event) {       
+          sim.setSignal(event.getX() - canvas.getWidth() / 2, 
+          canvas.getHeight() / 2 - event.getY());
+          canvas.zeichneSimulation();
+      }
+  });
+    
 		primaryStage.setScene(new Scene(wurzel, 850, 600));
 		primaryStage.show();
 	}
@@ -120,8 +146,8 @@ public class BVAnwendung extends Application {
 		sim.vehikelHinzufuegen(vehikel2);
 		return sim;
 	}
-
-	public static void main(String[] args) {
+	
+  public static void main(String[] args) {
 		launch(args);
 	}
 }

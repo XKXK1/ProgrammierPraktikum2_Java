@@ -27,6 +27,12 @@ public class BVCanvas extends Canvas implements Observer {
    */
   private Image bvImage =
       new Image("braitenberg/assets/braitenberg_vehikel.png");
+  
+  private Image bvAttr =
+      new Image("braitenberg/assets/icon_attraktion.png");
+  
+  private Image bvAbst =
+      new Image("braitenberg/assets/icon_abstossung.png");
 
   /**
    * Referenz auf die Simulation.
@@ -76,12 +82,15 @@ public class BVCanvas extends Canvas implements Observer {
   /**
    * Zeichnet ein Bild gedreht.
    */
-  private void zeichneGedrehtesBild(GraphicsContext gc, Image image,
+  private void zeichneGedrehtesBild(GraphicsContext gc, Image image,Image richtung,String name,
       double winkel, double x, double y) {
     // Zustand auf dem Stack sichern
     gc.save();
     rotieren(gc, winkel, x + image.getWidth() / 2, y + image.getHeight() / 2);
     gc.drawImage(image, x, y);
+    gc.drawImage(richtung, x+45, y);
+    gc.setFill(Color.BLACK);
+    gc.fillText(name, x+15, y+60);
     // Zustand wiederherstellen
     gc.restore();
   }
@@ -94,7 +103,12 @@ public class BVCanvas extends Canvas implements Observer {
     double winkelInGrad = bv.getRotationGradImUhrzeigersinn();
     int x = (int) (p.x - bv.getSeitenlaenge() / 2);
     int y = (int) (p.y - bv.getSeitenlaenge() / 2);
-    zeichneGedrehtesBild(gc, bvImage, winkelInGrad, x, y);
+    String name = bv.getName();
+    if(bv.getBewegung().getId()=="ATTRAKTION"){
+    zeichneGedrehtesBild(gc, bvImage,bvAttr,name, winkelInGrad, x, y);
+    }else{
+      zeichneGedrehtesBild(gc, bvImage,bvAbst,name, winkelInGrad, x, y);
+    }
   }
 
   /**
