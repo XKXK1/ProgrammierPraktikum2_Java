@@ -130,7 +130,6 @@ public class BVAnwendung extends Application {
       }
   });
     
-    
 		primaryStage.setScene(new Scene(wurzel, 850, 600));
 		primaryStage.show();
 	}
