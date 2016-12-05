@@ -43,6 +43,9 @@ public class BVCanvas extends Canvas implements Observer {
 	  super(breite, hoehe);  
 	  this.sim = sim;
 	  this.sim.addObserver(this); 
+	  for(int i = 0; i < sim.getAnzahlVehike();i++){
+	    	sim.getVehikel(i).addObserver(this);
+	  }
   }
 
   /**

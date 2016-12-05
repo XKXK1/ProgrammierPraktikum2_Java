@@ -87,6 +87,8 @@ public class BVSimulation extends Observable implements Runnable  {
 
   public void setSignal(double x, double y) {
     signal = new Vektor2(x, y);
+    setChanged();
+    notifyObservers(); 
   }
 
 @Override
