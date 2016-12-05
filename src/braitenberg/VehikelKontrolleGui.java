@@ -24,6 +24,7 @@ public class VehikelKontrolleGui {
 			splitpanes.get(i).getItems().add(comboboxen.get(i));
 			vbox.getChildren().add(splitpanes.get(i));
 			splitpanes.get(i).setStyle("-fx-box-border: transparent;");
+			comboboxen.get(i).setValue(sim.getVehikel(i).getBewegung().getId());
 		}
 	}
 

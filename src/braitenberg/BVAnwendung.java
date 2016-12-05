@@ -33,6 +33,7 @@ import braitenberg.view.BVCanvas;
 public class BVAnwendung extends Application {
 
 	private VehikelKontrolleGui vehikelKontrolleGui = new VehikelKontrolleGui();
+	private Thread simulationThread;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -64,11 +65,14 @@ public class BVAnwendung extends Application {
 		vbox.getChildren().add(knopf);
 
 		// Checkbox hinzufuegen
-		Thread simulationThread = new Thread(sim);
+
 		CheckBox auswahlbox = new CheckBox("Simuliere");
 		auswahlbox.setOnAction((event) -> {
+
 			if (auswahlbox.isSelected()) {
+				simulationThread = new Thread(sim);
 				simulationThread.start();
+
 			} else {
 				simulationThread.interrupt();
 			}
@@ -79,8 +83,11 @@ public class BVAnwendung extends Application {
 		vbox.setSpacing(10);
 		vbox.setPadding(new Insets(50, 50, 10, 20));
 
+		// Erstellt Kontrollelemente fuer alle Vehikel
 		vehikelKontrolleGui.kontrollElementeErstellen(sim, vbox);
 
+		// Fuegt alle Comboboxen als Listener mit dem dazugehoerigen Fahrzeug
+		// hinzu
 		for (int i = 0; i < vehikelKontrolleGui.getComboboxen().size(); i++) {
 			final int vehikelnummer = i;
 			vehikelKontrolleGui.getComboboxen().get(i).getSelectionModel().selectedItemProperty()
@@ -94,6 +101,7 @@ public class BVAnwendung extends Application {
 					});
 		}
 
+		// Signal ist per Mausclick setzbar
 		canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {

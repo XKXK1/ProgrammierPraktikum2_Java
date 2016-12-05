@@ -6,22 +6,20 @@ package braitenberg.braitenbergvehikel;
  * @author Philipp Jenke
  */
 public class BVBewegungAttraktion implements BVBewegung {
-  public static final String ID = "ATTRAKTION";
+	public static final String ID = "ATTRAKTION";
 
-  @Override
-  public double berechneMotorAnsteuerungLinks(double sensorWertLinks,
-      double sensorWertRechts) {
-    return sensorWertRechts * sensorWertRechts;
-  }
+	@Override
+	public double berechneMotorAnsteuerungLinks(double sensorWertLinks, double sensorWertRechts) {
+		return sensorWertRechts * sensorWertRechts;
+	}
 
-  @Override
-  public double berechneMotorAnsteuerungRechts(double sensorWertLinks,
-      double sensorWertRechts) {
-    return sensorWertLinks * sensorWertLinks;
-  }
+	@Override
+	public double berechneMotorAnsteuerungRechts(double sensorWertLinks, double sensorWertRechts) {
+		return sensorWertLinks * sensorWertLinks;
+	}
 
-  @Override
-  public String getId() {
-    return ID;
-  }
+	@Override
+	public String getId() {
+		return ID;
+	}
 }
