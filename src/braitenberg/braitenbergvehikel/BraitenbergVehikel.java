@@ -195,6 +195,8 @@ public class BraitenbergVehikel extends Observable {
 
 	public void setBewegung(BVBewegung bewegung) {
 		this.bewegung = bewegung;
+		// Wenn die Bewegung in den Menues der Vehikel veraendert wird, erfahert
+		// der Observer davon
 		setChanged();
 		notifyObservers();
 	}

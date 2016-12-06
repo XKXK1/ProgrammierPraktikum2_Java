@@ -6,7 +6,6 @@ package braitenberg.braitenbergvehikel;
  * @author Philipp Jenke
  */
 public class BVBewegungAbstossung implements BVBewegung {
-
 	public static final String ID = "ABSTOSSUNG";
 
 	@Override

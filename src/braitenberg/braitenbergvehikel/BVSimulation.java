@@ -35,6 +35,8 @@ public class BVSimulation extends Observable implements Runnable {
 
 			// Bewege vehikel
 			vehikel.bewege();
+
+			// Nach Jeder Bewegung wird der Observer benachrichtigt
 			setChanged();
 			notifyObservers();
 		}
@@ -80,17 +82,19 @@ public class BVSimulation extends Observable implements Runnable {
 		notifyObservers();
 	}
 
+	
 	@Override
+	/**
+	 * Dieser Thread fuehrt alle 200ms einen Simulationsschritt aus
+	 */
 	public void run() {
 		while (!Thread.interrupted()) {
 			try {
 				this.simulationsSchritt();
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
-				System.err.println("Thread wurde durch Interrupt angesprochen");
 				Thread.currentThread().interrupt();
 			}
 		}
-		System.err.println("Thead beendet");
 	}
 }

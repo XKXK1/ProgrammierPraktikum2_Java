@@ -12,9 +12,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import braitenberg.braitenbergvehikel.BVBewegungAbstossung;
@@ -43,6 +46,7 @@ public class BVAnwendung extends Application {
 		// Canvas setzen
 		BVCanvas canvas = new BVCanvas(600, 600, sim);
 
+		// Simulation wird erstmalig gezeichnet
 		canvas.zeichneSimulation();
 
 		// Szenengraph aufbauen
@@ -50,11 +54,21 @@ public class BVAnwendung extends Application {
 		BorderPane wurzel = new BorderPane();
 		wurzel.setCenter(canvas);
 
-		VBox vbox = new VBox(2);
+		// Vbox wird an der rechten Seite erstellt(zum hinzufuegen der
+		// Kontrollelemente)
+		VBox vbox = new VBox();
+		vbox.setSpacing(10);
+		vbox.setPadding(new Insets(20, 50, 10, 20));
 		wurzel.setRight(vbox);
+
+		// Ueberschrift fuer Bewegungsrichtung
+		Label ueberschrift1 = new Label("Simulation");
+		ueberschrift1.setFont(Font.font(null, FontWeight.BOLD, 20));
+		vbox.getChildren().add(ueberschrift1);
 
 		// Button zum Simulieren
 		Button knopf = new Button("Simuliere!");
+		// Event wenn Button gedrueckt wird
 		knopf.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -64,8 +78,7 @@ public class BVAnwendung extends Application {
 		});
 		vbox.getChildren().add(knopf);
 
-		// Checkbox hinzufuegen
-
+		// Checkbox zum Starten/Schliessen eine SimulationThreads
 		CheckBox auswahlbox = new CheckBox("Simuliere");
 		auswahlbox.setOnAction((event) -> {
 
@@ -77,13 +90,14 @@ public class BVAnwendung extends Application {
 				simulationThread.interrupt();
 			}
 		});
-
-		// Vbox zum anordnen der Elemente
 		vbox.getChildren().add(auswahlbox);
-		vbox.setSpacing(10);
-		vbox.setPadding(new Insets(50, 50, 10, 20));
 
-		// Erstellt Kontrollelemente fuer alle Vehikel
+		// Ueberschrift fuer Bewegungsrichtung
+		Label ueberschrift2 = new Label("Bewegungsrichtung");
+		ueberschrift2.setFont(Font.font(null, FontWeight.BOLD, 20));
+		vbox.getChildren().add(ueberschrift2);
+
+		// Erstellt Kontrollelemente fuer alle Vehikel der Simulation
 		vehikelKontrolleGui.kontrollElementeErstellen(sim, vbox);
 
 		// Fuegt alle Comboboxen als Listener mit dem dazugehoerigen Fahrzeug
@@ -97,14 +111,14 @@ public class BVAnwendung extends Application {
 						} else {
 							sim.getVehikel(vehikelnummer).setBewegung(new BVBewegungAbstossung());
 						}
-
 					});
 		}
 
-		// Signal ist per Mausclick setzbar
+		// Signal per Mausclick setzen
 		canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				// Mauskoordinaten werden in Weltkoordinaten umgerechnet
 				sim.setSignal(event.getX() - canvas.getWidth() / 2, canvas.getHeight() / 2 - event.getY());
 			}
 		});

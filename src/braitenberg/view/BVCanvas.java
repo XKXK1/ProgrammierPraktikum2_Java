@@ -26,9 +26,15 @@ public class BVCanvas extends Canvas implements Observer {
 	 * werden.
 	 */
 	private Image bvImage = new Image("braitenberg/assets/braitenberg_vehikel.png");
-
+	
+	/**
+	 * Bild Bewegungsrichtung Attraktion.
+	 */
 	private Image bvAttr = new Image("braitenberg/assets/icon_attraktion.png");
 
+	/**
+	 * Bild Bewegungsrichtung Abstossung.
+	 */
 	private Image bvAbst = new Image("braitenberg/assets/icon_abstossung.png");
 
 	/**
@@ -39,7 +45,9 @@ public class BVCanvas extends Canvas implements Observer {
 	public BVCanvas(int breite, int hoehe, BVSimulation sim) {
 		super(breite, hoehe);
 		this.sim = sim;
+		// Diesen Observer der Simulation zuordnen
 		this.sim.addObserver(this);
+		// Diesen Observer jedem Vehikel zuordnen
 		for (int i = 0; i < sim.getAnzahlVehike(); i++) {
 			sim.getVehikel(i).addObserver(this);
 		}
