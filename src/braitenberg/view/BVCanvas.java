@@ -94,8 +94,11 @@ public class BVCanvas extends Canvas implements Observer {
 		gc.save();
 		rotieren(gc, winkel, x + image.getWidth() / 2, y + image.getHeight() / 2);
 		gc.drawImage(image, x, y);
+		// Zeichnen des Bewegungspfeiles
 		gc.drawImage(richtung, x + 45, y);
+		// Setzen der Textfarbe
 		gc.setFill(Color.BLACK);
+		// Zeichnen des Namens fuer jedes Vehikel
 		gc.fillText(name, x + 15, y + 60);
 		// Zustand wiederherstellen
 		gc.restore();
@@ -110,6 +113,7 @@ public class BVCanvas extends Canvas implements Observer {
 		int x = (int) (p.x - bv.getSeitenlaenge() / 2);
 		int y = (int) (p.y - bv.getSeitenlaenge() / 2);
 		String name = bv.getName();
+		// Bewegungsbild je nach Bewegungsart anpassen
 		if (bv.getBewegung().getId() == "ATTRAKTION") {
 			zeichneGedrehtesBild(gc, bvImage, bvAttr, name, winkelInGrad, x, y);
 		} else {
